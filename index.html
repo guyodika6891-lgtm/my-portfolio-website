@@ -1,999 +1,1151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GUYO DIKA - Lecturer & Developer</title>
-    <link rel="stylesheet" href="index.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>GUYO DIKA · Lecturer & Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* ---------- RESET & BASE ---------- */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      color: #0f172a;
+      background: #f8fafc;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+    /* ---------- LOADING ---------- */
+    .loading {
+      position: fixed; inset: 0; background: #f8fafc; display: flex;
+      justify-content: center; align-items: center; z-index: 9999;
+      transition: opacity 0.5s, visibility 0.5s;
+    }
+    .loading.hidden { opacity: 0; visibility: hidden; }
+    .spinner {
+      width: 48px; height: 48px; border: 5px solid #e2e8f0;
+      border-top: 5px solid #2563eb; border-radius: 50%;
+      animation: spin 0.9s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ---------- HEADER – PROFESSIONAL GLASSMORPHISM ---------- */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 0 20px;
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      background: rgba(255, 255, 255, 0.70);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid rgba(37, 99, 235, 0.06);
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+    }
+    header.scrolled {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(24px) saturate(200%);
+      -webkit-backdrop-filter: blur(24px) saturate(200%);
+      border-bottom: 1px solid rgba(37, 99, 235, 0.12);
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.05);
+    }
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #2563eb, #8b5cf6, #f97316, transparent);
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+    header.scrolled::after { opacity: 1; }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4px 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1.3rem;
+      box-shadow: 0 6px 16px rgba(37, 99, 235, 0.20);
+      transition: 0.3s;
+    }
+    .logo:hover .logo-icon {
+      transform: scale(1.06) rotate(-3deg);
+      box-shadow: 0 8px 24px rgba(37, 99, 235, 0.30);
+    }
+    .logo-text {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      background: linear-gradient(135deg, #0f172a 30%, #2563eb 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .logo-text span { font-weight: 300; opacity: 0.6; -webkit-text-fill-color: #64748b; }
+
+    .nav-links {
+      display: none;
+      list-style: none;
+      align-items: center;
+      gap: 2px;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-links li a {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 16px;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #1e293b;
+      text-decoration: none;
+      transition: all 0.2s;
+      background: transparent;
+      border: 1px solid transparent;
+      letter-spacing: 0.2px;
+    }
+    .nav-links li a i {
+      font-size: 0.8rem;
+      color: #64748b;
+      transition: 0.2s;
+    }
+    .nav-links li a:hover {
+      background: rgba(37, 99, 235, 0.07);
+      border-color: rgba(37, 99, 235, 0.12);
+      color: #2563eb;
+      transform: translateY(-1px);
+    }
+    .nav-links li a:hover i { color: #2563eb; }
+    .nav-links li a.active {
+      background: rgba(37, 99, 235, 0.10);
+      color: #2563eb;
+      font-weight: 600;
+      border-color: rgba(37, 99, 235, 0.15);
+    }
+    .nav-links li a.active i { color: #2563eb; }
+
+    .menu-toggle {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 10px 8px;
+      border-radius: 40px;
+      background: rgba(255,255,255,0.5);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border: 1px solid rgba(37, 99, 235, 0.08);
+      transition: 0.2s;
+      margin-left: auto;
+    }
+    .menu-toggle:hover {
+      background: rgba(37, 99, 235, 0.04);
+      border-color: rgba(37, 99, 235, 0.18);
+    }
+    .menu-toggle span {
+      width: 24px;
+      height: 2.5px;
+      background: #1e293b;
+      border-radius: 40px;
+      transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: block;
+      transform-origin: center;
+    }
+    .menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 6px);
+      background: #2563eb;
+      width: 26px;
+    }
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+    .menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -7px);
+      background: #2563eb;
+      width: 26px;
+    }
+
+    .mobile-menu {
+      position: fixed;
+      top: 72px;
+      left: 0;
+      width: 100%;
+      height: calc(100vh - 72px);
+      background: rgba(255, 255, 255, 0.97);
+      backdrop-filter: blur(32px) saturate(200%);
+      -webkit-backdrop-filter: blur(32px) saturate(200%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 32px 24px 40px;
+      gap: 6px;
+      transform: translateY(-110%);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      border-bottom: 2px solid rgba(37, 99, 235, 0.06);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.06);
+      overflow-y: auto;
+      list-style: none;
+      z-index: 999;
+    }
+    .mobile-menu.active {
+      transform: translateY(0);
+      opacity: 1;
+      visibility: visible;
+    }
+    .mobile-menu li {
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: all 0.3s ease;
+      transition-delay: calc(0.04s * var(--i, 0));
+    }
+    .mobile-menu.active li {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .mobile-menu li a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      padding: 16px 20px;
+      font-weight: 500;
+      font-size: 1rem;
+      color: #0f172a;
+      text-decoration: none;
+      border-radius: 60px;
+      background: rgba(255,255,255,0.5);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border: 1px solid rgba(37, 99, 235, 0.06);
+      transition: 0.2s;
+      width: 100%;
+      letter-spacing: 0.2px;
+    }
+    .mobile-menu li a i {
+      font-size: 1.1rem;
+      color: #2563eb;
+      width: 28px;
+      text-align: center;
+    }
+    .mobile-menu li a:hover {
+      background: rgba(37, 99, 235, 0.06);
+      border-color: rgba(37, 99, 235, 0.15);
+      transform: scale(1.02);
+    }
+
+    /* ---------- HERO / BANNER ---------- */
+    #hero { margin-top: 72px; position: relative; }
+    .photo-banner {
+      position: relative;
+      min-height: 60vh;
+      background: linear-gradient(145deg, #0f172a, #1e3a8a, #4f46e5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 50px 20px 70px;
+      overflow: hidden;
+    }
+    .photo-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 20% 40%, rgba(255,255,255,0.06) 0%, transparent 60%),
+                  radial-gradient(circle at 80% 70%, rgba(255,255,255,0.04) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .banner-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.10); backdrop-filter: blur(1px); }
+    .banner-content { position: relative; z-index: 2; max-width: 720px; padding: 0 6px; }
+    .welcome-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(255,255,255,0.12); backdrop-filter: blur(8px);
+      padding: 8px 22px; border-radius: 40px; font-size: 0.8rem;
+      font-weight: 500; color: #fff; border: 1px solid rgba(255,255,255,0.15);
+      margin-bottom: 24px;
+      letter-spacing: 0.3px;
+    }
+    .main-title { font-size: 2.8rem; font-weight: 800; line-height: 1.1; color: #fff; }
+    .greeting { display: block; font-size: 1.3rem; font-weight: 400; opacity: 0.85; }
+    .name {
+      display: inline-block;
+      background: linear-gradient(45deg, #fde047, #f59e0b, #f97316);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 50px rgba(251,191,36,0.2);
+      position: relative;
+    }
+    .name::after {
+      content: '|';
+      -webkit-text-fill-color: #fde047;
+      animation: blink 0.9s infinite;
+      margin-left: 2px;
+    }
+    .name.typing-done::after { display: none; }
+    @keyframes blink { 0%,50%{opacity:1} 51%,100%{opacity:0} }
+
+    .title-decoration {
+      display: flex; align-items: center; justify-content: center; gap: 16px;
+      margin: 18px 0 14px;
+    }
+    .decoration-line { width: 50px; height: 2px; background: linear-gradient(90deg, transparent, #fde047, transparent); border-radius: 4px; }
+    .title-decoration i { color: #fde047; font-size: 1.2rem; }
+
+    .subtitle { font-size: 1.4rem; font-weight: 600; color: #fff; margin-bottom: 14px; }
+    .university-highlight { color: #fde047; font-weight: 700; }
+    .hero-description {
+      font-size: 0.95rem; line-height: 1.7; color: rgba(255,255,255,0.85);
+      max-width: 500px; margin: 0 auto 22px;
+    }
+    .location-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(255,255,255,0.08); backdrop-filter: blur(8px);
+      padding: 10px 24px; border-radius: 40px; font-size: 0.85rem;
+      font-weight: 500; color: #fff; border: 1px solid rgba(255,255,255,0.10);
+    }
+
+    .profile-showcase {
+      background: linear-gradient(135deg, #f1f5f9, #e8edf5);
+      padding: 48px 0 56px;
+    }
+    .showcase-container {
+      display: flex; flex-direction: column; align-items: center; gap: 32px;
+      padding: 0 16px;
+    }
+    .profile-card {
+      background: #fff; border-radius: 36px; padding: 32px 24px 28px;
+      box-shadow: 0 24px 56px rgba(0,0,0,0.04); text-align: center;
+      width: 100%; max-width: 420px; position: relative;
+      border: 1px solid rgba(255,255,255,0.6);
+    }
+    .profile-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 4px; background: linear-gradient(90deg, #2563eb, #8b5cf6, #f97316);
+      border-radius: 36px 36px 0 0;
+    }
+    .profile-image-wrapper {
+      position: relative; display: inline-block; margin-bottom: 18px;
+    }
+    .profile-photo {
+      width: 150px; height: 150px; object-fit: cover; border-radius: 50%;
+      border: 4px solid #fff; box-shadow: 0 16px 40px rgba(0,0,0,0.06);
+      transition: 0.3s;
+    }
+    .profile-photo:hover { transform: scale(1.04) rotate(2deg); }
+    .profile-glow {
+      position: absolute; inset: -10px; border-radius: 50%;
+      background: linear-gradient(45deg, #2563eb, #f97316, #8b5cf6);
+      opacity: 0.10; animation: rotateGlow 8s linear infinite;
+    }
+    @keyframes rotateGlow { to { transform: rotate(360deg); } }
+    .profile-badge {
+      position: absolute; bottom: 6px; right: 6px;
+      width: 44px; height: 44px; background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 1.1rem; box-shadow: 0 6px 16px rgba(251,191,36,0.35);
+    }
+    .profile-info h3 { font-size: 1.7rem; font-weight: 700; color: #0f172a; }
+    .profile-role { color: #475569; font-size: 0.95rem; font-weight: 500; margin-bottom: 18px; }
+    .profile-stats { display: flex; justify-content: space-around; gap: 8px; }
+    .stat-number { display: block; font-size: 1.9rem; font-weight: 800; color: #2563eb; line-height: 1.2; }
+    .stat-label { font-size: 0.7rem; color: #64748b; font-weight: 500; text-transform: uppercase; letter-spacing: 0.4px; }
+
+    .action-buttons {
+      display: flex; flex-direction: column; gap: 14px;
+      width: 100%; max-width: 380px;
+    }
+    .action-btn {
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+      padding: 16px 28px; border-radius: 60px; font-weight: 600; font-size: 0.95rem;
+      text-decoration: none; transition: 0.25s; border: none; width: 100%;
+      background: #fff; color: #1e293b; box-shadow: 0 4px 16px rgba(0,0,0,0.02);
+      border: 1px solid rgba(0,0,0,0.03);
+    }
+    .action-btn.primary {
+      background: linear-gradient(135deg, #f97316, #ea580c); color: #fff;
+      box-shadow: 0 8px 28px rgba(249,115,22,0.25);
+    }
+    .action-btn.secondary {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8); color: #fff;
+      box-shadow: 0 8px 28px rgba(37,99,235,0.25);
+    }
+    .action-btn.tertiary {
+      background: transparent; border: 2px solid #2563eb; color: #2563eb;
+    }
+    .action-btn:active { transform: scale(0.97); }
+
+    /* ---------- SECTIONS ---------- */
+    section { padding: 64px 0 56px; }
+    .section-header { text-align: center; margin-bottom: 36px; }
+    .section-header h2 {
+      font-size: 2.2rem; font-weight: 700; color: #0f172a; letter-spacing: -0.5px;
+    }
+    .section-divider {
+      width: 60px; height: 4px; background: linear-gradient(90deg, #2563eb, #8b5cf6);
+      margin: 12px auto 8px; border-radius: 8px;
+    }
+    .section-subtitle { color: #64748b; font-size: 0.9rem; margin-top: 6px; }
+
+    .about-content {
+      display: flex; flex-direction: column; gap: 32px;
+    }
+    .about-text { order: 2; }
+    .about-image { order: 1; display: flex; justify-content: center; }
+    .about-intro h3 {
+      font-size: 1.6rem; display: flex; align-items: center; gap: 10px;
+      color: #2563eb; margin-bottom: 10px;
+    }
+    .about-intro p { font-size: 0.95rem; color: #334155; line-height: 1.8; }
+    .about-details { display: grid; gap: 14px; margin: 20px 0; }
+    .detail-item {
+      display: flex; align-items: center; gap: 16px;
+      padding: 14px 18px; background: #fff; border-radius: 24px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02); border: 1px solid #f1f5f9;
+      transition: 0.2s;
+    }
+    .detail-item:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.04); }
+    .detail-item i {
+      font-size: 1.2rem; color: #2563eb; width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(37,99,235,0.06); border-radius: 50%;
+    }
+    .detail-item h4 { font-size: 0.95rem; font-weight: 600; }
+    .detail-item p { font-size: 0.85rem; color: #475569; }
+    .about-summary {
+      font-style: italic; color: #334155; font-size: 0.95rem;
+      border-left: 4px solid #2563eb; padding-left: 18px;
+    }
+    .profile-image {
+      width: 240px; height: 240px; object-fit: cover; border-radius: 40px;
+      box-shadow: 0 24px 48px rgba(0,0,0,0.06);
+    }
+
+    .timeline { position: relative; padding: 0 4px; }
+    .timeline-item { margin-bottom: 28px; position: relative; }
+    .timeline-content { display: flex; gap: 18px; align-items: flex-start; }
+    .timeline-icon {
+      width: 52px; height: 52px; min-width: 52px;
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 1.3rem; box-shadow: 0 8px 24px rgba(37,99,235,0.20);
+    }
+    .timeline-text {
+      background: #fff; padding: 18px 22px; border-radius: 24px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.02); border: 1px solid #f1f5f9;
+      flex: 1;
+    }
+    .timeline-text h3 { font-size: 1.1rem; font-weight: 600; }
+    .timeline-date { color: #2563eb; font-weight: 600; font-size: 0.8rem; }
+    .timeline-location { color: #64748b; font-size: 0.8rem; font-style: italic; }
+    .timeline-text p { font-size: 0.9rem; color: #334155; margin-top: 4px; }
+
+    .experience-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+    .experience-card {
+      background: #fff; border-radius: 28px; overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.02); border: 1px solid #f1f5f9;
+      transition: 0.25s;
+    }
+    .experience-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.04); }
+    .experience-header {
+      background: linear-gradient(135deg, #2563eb, #4f46e5);
+      padding: 20px 24px; color: #fff; display: flex; align-items: center; gap: 16px;
+    }
+    .experience-icon {
+      width: 48px; height: 48px; background: rgba(255,255,255,0.15);
+      border-radius: 16px; display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+    }
+    .experience-title h3 { font-size: 1.1rem; font-weight: 600; }
+    .experience-company, .experience-period { font-size: 0.8rem; opacity: 0.85; }
+    .experience-content { padding: 20px 24px 24px; }
+    .experience-content p { font-size: 0.9rem; color: #334155; }
+    .experience-responsibilities {
+      list-style: none; padding: 0; margin-top: 14px;
+    }
+    .experience-responsibilities li {
+      padding: 6px 0 6px 30px; position: relative; font-size: 0.85rem;
+      color: #475569; border-bottom: 1px solid #f1f5f9;
+    }
+    .experience-responsibilities li::before {
+      content: '✓'; position: absolute; left: 0; color: #22c55e; font-weight: 700;
+    }
+
+    .research-stats {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 36px;
+    }
+    .stat-card {
+      background: #fff; padding: 20px 12px; border-radius: 24px;
+      text-align: center; border: 1px solid #f1f5f9; transition: 0.2s;
+    }
+    .stat-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.04); }
+    .stat-card .stat-number { font-size: 2rem; }
+    .stat-card .stat-label { font-size: 0.7rem; }
+
+    .publication-item {
+      display: flex; gap: 18px; background: #fff; padding: 18px 20px;
+      border-radius: 24px; margin-bottom: 16px; border: 1px solid #f1f5f9;
+      align-items: flex-start; transition: 0.2s;
+    }
+    .publication-item:hover { transform: translateX(4px); box-shadow: 0 4px 16px rgba(0,0,0,0.02); }
+    .publication-icon {
+      width: 44px; height: 44px; min-width: 44px;
+      background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+      border-radius: 16px; display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 1.1rem;
+    }
+    .publication-details h4 { font-size: 0.95rem; font-weight: 600; }
+    .publication-meta { font-size: 0.75rem; color: #2563eb; font-weight: 500; }
+    .publication-details p { font-size: 0.85rem; color: #475569; }
+
+    .interests-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 18px;
+    }
+    .interest-item {
+      background: #fff; padding: 14px 12px; border-radius: 20px;
+      border: 1px solid #f1f5f9; display: flex; align-items: center; gap: 10px;
+      font-size: 0.8rem; font-weight: 500; transition: 0.2s;
+    }
+    .interest-item:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.03); }
+    .interest-item i { color: #8b5cf6; font-size: 1.1rem; width: 26px; }
+
+    /* ---------- SKILLS – PYTHON HIGHLIGHT ---------- */
+    .skills-grid { display: grid; gap: 18px; }
+    .skill-item {
+      background: #fff; padding: 18px 22px; border-radius: 28px;
+      border: 1px solid #f1f5f9; transition: 0.2s;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .skill-item:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.02); }
+    .skill-info { flex: 1; }
+    .skill-info h3 {
+      font-size: 1rem; font-weight: 600; margin-bottom: 6px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .skill-info h3 i { color: #2563eb; font-size: 0.9rem; }
+    .skill-bar {
+      height: 10px; background: #e2e8f0; border-radius: 40px; overflow: hidden;
+    }
+    .skill-fill {
+      height: 100%; background: linear-gradient(90deg, #2563eb, #8b5cf6);
+      border-radius: 40px; width: 0%; transition: width 1.2s ease;
+    }
+    .skill-item.python-highlight {
+      border: 2px solid #f59e0b;
+      background: linear-gradient(135deg, #fffbeb, #fff);
+      box-shadow: 0 4px 20px rgba(245, 158, 11, 0.10);
+    }
+    .skill-item.python-highlight .skill-fill {
+      background: linear-gradient(90deg, #f59e0b, #f97316);
+    }
+    .skill-item.python-highlight h3 i { color: #f59e0b; }
+
+    /* ---------- PROJECTS – custom ---------- */
+    .projects-grid { display: grid; grid-template-columns: 1fr; gap: 28px; }
+    .project-card {
+      background: #fff; border-radius: 32px; overflow: hidden;
+      border: 1px solid #f1f5f9; box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+      transition: 0.3s;
+    }
+    .project-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,0.04); }
+    .project-card img {
+      width: 100%; height: 200px; object-fit: cover; display: block;
+    }
+    .project-card h3 {
+      padding: 18px 22px 4px; font-size: 1.2rem; font-weight: 700;
+      color: #0f172a;
+    }
+    .project-card .project-tag {
+      display: inline-block; font-size: 0.7rem; font-weight: 600;
+      color: #2563eb; background: rgba(37,99,235,0.08);
+      padding: 2px 12px; border-radius: 20px; margin-left: 22px;
+      letter-spacing: 0.3px;
+    }
+    .project-card p {
+      padding: 8px 22px 16px; font-size: 0.9rem; color: #475569;
+    }
+    .project-links { padding: 0 22px 22px; display: flex; gap: 12px; }
+    .btn {
+      flex: 1; padding: 12px 8px; text-align: center;
+      background: #f1f5f9; border-radius: 40px; font-weight: 500;
+      font-size: 0.8rem; color: #1e293b; text-decoration: none; transition: 0.2s;
+    }
+    .btn:hover { background: #e2e8f0; transform: translateY(-1px); }
+    .btn-primary {
+      background: linear-gradient(135deg, #2563eb, #4f46e5);
+      color: #fff;
+    }
+    .btn-primary:hover { background: linear-gradient(135deg, #1d4ed8, #4338ca); }
+
+    .testimonials-grid {
+      display: grid; grid-template-columns: 1fr; gap: 20px;
+    }
+    .testimonial-card {
+      background: #fff; border-radius: 28px; padding: 24px 22px;
+      border: 1px solid #f1f5f9; box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+      transition: 0.2s;
+    }
+    .testimonial-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.04); }
+    .testimonial-quote { color: #f59e0b; font-size: 1.4rem; margin-bottom: 10px; }
+    .testimonial-content p { font-size: 0.9rem; color: #334155; font-style: italic; }
+    .testimonial-author {
+      display: flex; align-items: center; gap: 14px;
+      margin-top: 18px; padding-top: 14px; border-top: 1px solid #f1f5f9;
+    }
+    .author-avatar {
+      width: 44px; height: 44px; background: linear-gradient(135deg, #f59e0b, #d97706);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 1.1rem;
+    }
+    .author-info h4 { font-size: 0.9rem; font-weight: 600; }
+    .author-info p { font-size: 0.75rem; color: #64748b; }
+
+    /* contact */
+    #contact { background: #f1f5f9; }
+    .contact-content {
+      display: flex; flex-direction: column; gap: 32px;
+    }
+    .contact-info {
+      background: #fff; padding: 28px 24px; border-radius: 36px;
+      border: 1px solid rgba(255,255,255,0.6);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.02);
+    }
+    .contact-icon {
+      width: 64px; height: 64px; background: linear-gradient(135deg, #2563eb, #7c3aed);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 14px; color: #fff; font-size: 1.6rem;
+      box-shadow: 0 8px 24px rgba(37,99,235,0.20);
+    }
+    .contact-intro h3 { font-size: 1.4rem; text-align: center; }
+    .contact-intro p { text-align: center; color: #475569; font-size: 0.9rem; }
+    .contact-details { margin: 22px 0; display: grid; gap: 12px; }
+    .detail-card {
+      display: flex; align-items: center; gap: 16px;
+      padding: 14px 16px; background: #f8fafc; border-radius: 24px;
+    }
+    .detail-icon {
+      width: 44px; height: 44px; background: #2563eb; border-radius: 16px;
+      display: flex; align-items: center; justify-content: center; color: #fff;
+    }
+    .social-links {
+      display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;
+    }
+    .social-link {
+      width: 46px; height: 46px; display: flex; align-items: center;
+      justify-content: center; border-radius: 16px; color: #fff;
+      font-size: 1rem; transition: 0.2s; text-decoration: none;
+    }
+    .social-link:hover { transform: translateY(-3px) scale(1.04); }
+    .social-link.linkedin { background: #0a66c2; }
+    .social-link.github { background: #24292e; }
+    .social-link.twitter { background: #1da1f2; }
+    .social-link.facebook { background: #1877f2; }
+    .social-link.instagram { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743); }
+    .social-link.google { background: #4285f4; }
+    .social-link.researchgate { background: #00ccbb; }
+    .social-link.whatsapp { background: #25d366; }
+    .social-link:active { transform: scale(0.92); }
+
+    .contact-form-container {
+      background: #fff; padding: 28px 24px; border-radius: 36px;
+      border: 1px solid rgba(255,255,255,0.6);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.02);
+    }
+    .form-header h3 { font-size: 1.4rem; text-align: center; }
+    .form-header p { text-align: center; color: #64748b; font-size: 0.9rem; }
+    .contact-form { display: grid; gap: 18px; margin-top: 18px; }
+    .form-group label { font-weight: 600; font-size: 0.85rem; }
+    .contact-form input, .contact-form textarea {
+      width: 100%; padding: 16px 18px; border: 1px solid #e2e8f0;
+      border-radius: 24px; font-family: inherit; font-size: 0.95rem;
+      background: #f8fafc; transition: 0.2s;
+    }
+    .contact-form input:focus, .contact-form textarea:focus {
+      outline: none; border-color: #2563eb; background: #fff;
+      box-shadow: 0 0 0 4px rgba(37,99,235,0.06);
+    }
+    .contact-form textarea { height: 120px; resize: vertical; }
+    .submit-btn {
+      background: linear-gradient(135deg, #2563eb, #4f46e5); color: #fff;
+      border: none; padding: 18px; border-radius: 60px; font-weight: 600;
+      font-size: 1rem; display: flex; align-items: center; justify-content: center;
+      gap: 12px; cursor: pointer; transition: 0.2s;
+      box-shadow: 0 8px 28px rgba(37,99,235,0.20);
+    }
+    .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(37,99,235,0.25); }
+    .submit-btn:active { transform: scale(0.97); }
+
+    footer {
+      background: #0f172a; color: #e2e8f0; padding: 48px 0 24px;
+    }
+    .footer-content {
+      display: grid; grid-template-columns: 1fr; gap: 32px;
+    }
+    .footer-section h3 { color: #f8fafc; font-size: 1.4rem; }
+    .footer-section h4 { color: #f1f5f9; font-size: 1rem; margin-bottom: 10px; }
+    .footer-section p { color: #94a3b8; font-size: 0.85rem; }
+    .footer-social {
+      display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px;
+    }
+    .footer-social .social-link {
+      width: 40px; height: 40px; border-radius: 14px; font-size: 0.85rem;
+    }
+    .footer-links { list-style: none; padding: 0; }
+    .footer-links li { margin-bottom: 4px; }
+    .footer-links a {
+      color: #94a3b8; text-decoration: none; font-size: 0.85rem;
+      transition: 0.2s;
+    }
+    .footer-links a:hover { color: #f8fafc; transform: translateX(4px); display: inline-block; }
+    .footer-contact p {
+      display: flex; align-items: center; gap: 10px; font-size: 0.85rem;
+    }
+    .footer-actions { margin-top: 14px; }
+    .cv-download-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: #2563eb; color: #fff; padding: 12px 24px;
+      border-radius: 40px; text-decoration: none; font-weight: 500;
+      font-size: 0.9rem; transition: 0.2s;
+    }
+    .cv-download-btn:hover { background: #1d4ed8; transform: translateY(-2px); }
+    .footer-bottom {
+      border-top: 1px solid #1e293b; padding-top: 24px;
+      margin-top: 24px; text-align: center; font-size: 0.8rem;
+      color: #64748b;
+    }
+
+    .back-to-top {
+      position: fixed; bottom: 24px; right: 20px;
+      width: 50px; height: 50px; background: #2563eb; color: #fff;
+      border: none; border-radius: 50%; font-size: 1.2rem;
+      box-shadow: 0 8px 28px rgba(37,99,235,0.25); opacity: 0;
+      visibility: hidden; transition: 0.25s; cursor: pointer; z-index: 999;
+    }
+    .back-to-top.show { opacity: 1; visibility: visible; }
+    .back-to-top:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(37,99,235,0.30); }
+    .back-to-top:active { transform: scale(0.92); }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (min-width: 600px) {
+      .main-title { font-size: 3.4rem; }
+      .profile-photo { width: 170px; height: 170px; }
+      .showcase-container { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+      .profile-card { max-width: 440px; }
+      .action-buttons { max-width: 400px; }
+      .experience-grid { grid-template-columns: 1fr 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr 1fr; }
+      .projects-grid { grid-template-columns: 1fr 1fr; }
+      .interests-grid { grid-template-columns: 1fr 1fr 1fr; }
+      .footer-content { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (min-width: 900px) {
+      .menu-toggle { display: none; }
+      .nav-links { display: flex; }
+      .mobile-menu { display: none; }
+      .photo-banner { min-height: 70vh; }
+      .main-title { font-size: 4.2rem; }
+      .about-content { flex-direction: row; align-items: center; gap: 48px; }
+      .about-text { order: 1; flex: 1.2; }
+      .about-image { order: 2; flex: 0.8; }
+      .profile-image { width: 300px; height: 300px; }
+      .contact-content { flex-direction: row; align-items: stretch; gap: 40px; }
+      .contact-info { flex: 1; }
+      .contact-form-container { flex: 1; }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
 </head>
 <body>
-    <div class="loading" id="loading">
-        <div class="spinner"></div>
+  <div class="loading" id="loading"><div class="spinner"></div></div>
+
+  <!-- HEADER -->
+  <header id="header">
+    <nav>
+      <a href="#" class="logo">
+        <div class="logo-icon"><i class="fas fa-code"></i></div>
+        <div class="logo-text">GUYO <span>DIKA</span></div>
+      </a>
+      <ul class="nav-links" id="desktopNav">
+        <li><a href="#about"><i class="fas fa-user"></i> About</a></li>
+        <li><a href="#education"><i class="fas fa-graduation-cap"></i> Education</a></li>
+        <li><a href="#experience"><i class="fas fa-briefcase"></i> Experience</a></li>
+        <li><a href="#research"><i class="fas fa-microscope"></i> Research</a></li>
+        <li><a href="#skills"><i class="fas fa-tools"></i> Skills</a></li>
+        <li><a href="#projects"><i class="fas fa-project-diagram"></i> Projects</a></li>
+        <li><a href="#testimonials"><i class="fas fa-comments"></i> Testimonials</a></li>
+        <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+      </ul>
+      <div class="menu-toggle" id="menuToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </div>
+    </nav>
+  </header>
+
+  <!-- MOBILE MENU -->
+  <ul class="mobile-menu" id="mobileMenu">
+    <li style="--i:0"><a href="#about"><i class="fas fa-user"></i> About</a></li>
+    <li style="--i:1"><a href="#education"><i class="fas fa-graduation-cap"></i> Education</a></li>
+    <li style="--i:2"><a href="#experience"><i class="fas fa-briefcase"></i> Experience</a></li>
+    <li style="--i:3"><a href="#research"><i class="fas fa-microscope"></i> Research</a></li>
+    <li style="--i:4"><a href="#skills"><i class="fas fa-tools"></i> Skills</a></li>
+    <li style="--i:5"><a href="#projects"><i class="fas fa-project-diagram"></i> Projects</a></li>
+    <li style="--i:6"><a href="#testimonials"><i class="fas fa-comments"></i> Testimonials</a></li>
+    <li style="--i:7"><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+  </ul>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="photo-banner">
+      <div class="banner-overlay"></div>
+      <div class="banner-content">
+        <div class="welcome-badge"><i class="fas fa-star"></i> Welcome to my portfolio</div>
+        <h1 class="main-title">
+          <span class="greeting">Hi, I'm</span>
+          <span class="name" id="typed-name"></span>
+        </h1>
+        <div class="title-decoration">
+          <div class="decoration-line"></div>
+          <i class="fas fa-graduation-cap"></i>
+          <div class="decoration-line"></div>
+        </div>
+        <h2 class="subtitle">Lecturer at <span class="university-highlight">Werabe University</span></h2>
+        <p class="hero-description">Passionate educator &amp; tech innovator creating digital solutions for education and community development.</p>
+        <div class="location-badge"><i class="fas fa-map-marker-alt"></i> Werabe &amp; Mega City, Ethiopia</div>
+      </div>
     </div>
-    <header>
-        <nav>
-            <div class="logo">
-                <i class="fas fa-code"></i>
-                GUYO DIKA
-            </div>
-            <div class="menu-toggle" id="menuToggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <ul id="navMenu">
-                <li><a href="#about"><i class="fas fa-user"></i> About</a></li>
-                <li><a href="#education"><i class="fas fa-graduation-cap"></i> Education</a></li>
-                <li><a href="#experience"><i class="fas fa-briefcase"></i> Experience</a></li>
-                <li><a href="#research"><i class="fas fa-microscope"></i> Research</a></li>
-                <li><a href="#skills"><i class="fas fa-tools"></i> Skills</a></li>
-                <li><a href="#projects"><i class="fas fa-project-diagram"></i> Projects</a></li>
-                <li><a href="#testimonials"><i class="fas fa-comments"></i> Testimonials</a></li>
-                <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <section id="hero">
-        <!-- Photo Banner Section -->
-        <div class="photo-banner">
-            <div class="banner-overlay"></div>
-            <div class="banner-content">
-                <div class="welcome-badge">
-                    <i class="fas fa-star"></i>
-                    Welcome to My Portfolio
-                </div>
-                <h1 class="main-title">
-                    <span class="greeting">Hi, I'm</span>
-                    <span class="name" id="typed-name"></span>
-                </h1>
-                <div class="title-decoration">
-                    <div class="decoration-line"></div>
-                    <i class="fas fa-graduation-cap"></i>
-                    <div class="decoration-line"></div>
-                </div>
-                <h2 class="subtitle">
-                    Lecturer at <span class="university-highlight">Werabe University</span>
-                </h2>
-                <p class="hero-description">
-                    Passionate educator and technology enthusiast creating innovative digital solutions
-                    for education and community development.
-                </p>
-                <div class="location-badge">
-                    <i class="fas fa-map-marker-alt"></i>
-                    Based in Werabe City & Mega City, Ethiopia
-                </div>
+    <div class="profile-showcase">
+      <div class="showcase-container">
+        <div class="profile-card">
+          <div class="profile-image-wrapper">
+            <img src="Snapchat-740498004.jpg" alt="GUYO DIKA" class="profile-photo">
+            <div class="profile-glow"></div>
+            <div class="profile-badge"><i class="fas fa-certificate"></i></div>
+          </div>
+          <div class="profile-info">
+            <h3>GUYO DIKA</h3>
+            <p class="profile-role">Lecturer &amp; Technology Innovator</p>
+            <div class="profile-stats">
+              <div class="stat"><span class="stat-number">5+</span><span class="stat-label">Years Teaching</span></div>
+              <div class="stat"><span class="stat-number">50+</span><span class="stat-label">Projects</span></div>
+              <div class="stat"><span class="stat-number">100%</span><span class="stat-label">Dedication</span></div>
             </div>
-            <div class="floating-elements">
-                <div class="floating-circle circle-1"></div>
-                <div class="floating-circle circle-2"></div>
-                <div class="floating-circle circle-3"></div>
-            </div>
+          </div>
         </div>
-
-        <!-- Profile Showcase Section -->
-        <div class="profile-showcase">
-            <div class="showcase-container">
-                <div class="profile-card">
-                    <div class="profile-image-wrapper">
-                        <img src="Snapchat-740498004.jpg" alt="GUYO DIKA" class="profile-photo">
-                        <div class="profile-glow"></div>
-                        <div class="profile-badge">
-                            <i class="fas fa-certificate"></i>
-                        </div>
-                    </div>
-                    <div class="profile-info">
-                        <h3>GUYO DIKA</h3>
-                        <p class="profile-role">Lecturer & Technology Innovator</p>
-                        <div class="profile-stats">
-                            <div class="stat">
-                                <span class="stat-number">5+</span>
-                                <span class="stat-label">Years Teaching</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-number">50+</span>
-                                <span class="stat-label">Projects</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-number">100%</span>
-                                <span class="stat-label">Dedication</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="action-buttons">
-                    <a href="#projects" class="action-btn primary">
-                        <i class="fas fa-eye"></i>
-                        View My Work
-                    </a>
-                    <a href="#contact" class="action-btn secondary">
-                        <i class="fas fa-envelope"></i>
-                        Get In Touch
-                    </a>
-                    <a href="#about" class="action-btn tertiary">
-                        <i class="fas fa-user"></i>
-                        Learn More
-                    </a>
-                </div>
-            </div>
+        <div class="action-buttons">
+          <a href="#projects" class="action-btn primary"><i class="fas fa-eye"></i> View My Work</a>
+          <a href="#contact" class="action-btn secondary"><i class="fas fa-envelope"></i> Get In Touch</a>
+          <a href="#about" class="action-btn tertiary"><i class="fas fa-user"></i> Learn More</a>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <div class="scroll-indicator">
-            <div class="scroll-mouse">
-                <div class="scroll-wheel"></div>
-            </div>
-            <p>Discover More</p>
-            <i class="fas fa-chevron-down"></i>
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <div class="section-header"><h2>About Me</h2><div class="section-divider"></div></div>
+      <div class="about-content">
+        <div class="about-text">
+          <div class="about-intro"><h3>Hello! <i class="fas fa-hand-wave"></i></h3><p>I'm GUYO DIKA, a Lecturer at Werabe University with a passion for bridging education and technology. Born in Borana Zone, I now call Werabe &amp; Mega City home.</p></div>
+          <div class="about-details">
+            <div class="detail-item"><i class="fas fa-graduation-cap"></i><div><h4>Education</h4><p>Lecturer at Werabe University</p></div></div>
+            <div class="detail-item"><i class="fas fa-map-marker-alt"></i><div><h4>Location</h4><p>Werabe &amp; Mega City, Ethiopia</p></div></div>
+            <div class="detail-item"><i class="fas fa-code"></i><div><h4>Passion</h4><p>Technology &amp; Community Development</p></div></div>
+          </div>
+          <p class="about-summary">With years of experience in education and technology, I specialize in teaching and developing digital solutions that make a difference.</p>
         </div>
-    </section>
+        <div class="about-image"><img src="Snapchat-740498004.jpg" alt="GUYO DIKA" class="profile-image"></div>
+      </div>
+    </div>
+  </section>
 
-    <section id="about">
-        <div class="container">
-            <div class="section-header">
-                <h2>About Me</h2>
-                <div class="section-divider"></div>
-            </div>
-            <div class="about-content">
-                <div class="about-text">
-                    <div class="about-intro">
-                        <h3>Hello! <i class="fas fa-hand-wave"></i></h3>
-                        <p>I'm GUYO DIKA, a dedicated Lecturer at Werabe University with a passion for bridging education and technology. Born in the beautiful Borana Zone, I now call Werabe City and Mega City my home.</p>
-                    </div>
-                    <div class="about-details">
-                        <div class="detail-item">
-                            <i class="fas fa-graduation-cap"></i>
-                            <div>
-                                <h4>Education</h4>
-                                <p>Lecturer at Werabe University</p>
-                            </div>
-                        </div>
-                        <div class="detail-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div>
-                                <h4>Location</h4>
-                                <p>Werabe City & Mega City, Ethiopia</p>
-                            </div>
-                        </div>
-                        <div class="detail-item">
-                            <i class="fas fa-code"></i>
-                            <div>
-                                <h4>Passion</h4>
-                                <p>Technology & Community Development</p>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="about-summary">With years of experience in education and technology, I specialize in teaching and developing digital solutions that make a difference in people's lives.</p>
-                </div>
-                <div class="about-image">
-                    <div class="image-wrapper">
-                        <img src="Snapchat-740498004.jpg" alt="GUYO DIKA" class="profile-image">
-                        <div class="image-decoration">
-                            <div class="decoration-circle"></div>
-                            <div class="decoration-circle"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="container">
+      <div class="section-header"><h2>Education &amp; Qualifications</h2><div class="section-divider"></div><p class="section-subtitle">My academic journey</p></div>
+      <div class="timeline">
+        <div class="timeline-item"><div class="timeline-content"><div class="timeline-icon"><i class="fas fa-graduation-cap"></i></div><div class="timeline-text"><h3>PhD in Computer Science (ongoing)</h3><p class="timeline-date">2025 – Present</p><p class="timeline-location">Werabe University</p><p>Thesis: "Advancing Digital Education"</p></div></div></div>
+        <div class="timeline-item"><div class="timeline-content"><div class="timeline-icon"><i class="fas fa-university"></i></div><div class="timeline-text"><h3>First Degree in Information Technology</h3><p class="timeline-date">2020 – 2024</p><p class="timeline-location">Werabe University, Ethiopia</p><p>Specialized in Educational Technology</p></div></div></div>
+        <div class="timeline-item"><div class="timeline-content"><div class="timeline-icon"><i class="fas fa-certificate"></i></div><div class="timeline-text"><h3>Bachelor's in Information Technology</h3><p class="timeline-date">2020 – 2024</p><p class="timeline-location">Werabe University</p><p>First Class Honors</p></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="container">
+      <div class="section-header"><h2>Teaching Experience</h2><div class="section-divider"></div><p class="section-subtitle">My journey in academia</p></div>
+      <div class="experience-grid">
+        <div class="experience-card"><div class="experience-header"><div class="experience-icon"><i class="fas fa-chalkboard-teacher"></i></div><div class="experience-title"><h3>Lecturer</h3><p class="experience-company">Werabe University</p><p class="experience-period">2025 – Present</p></div></div><div class="experience-content"><p>Teaching IT courses with focus on practical applications.</p><ul class="experience-responsibilities"><li>Course development &amp; curriculum design</li><li>Student mentoring &amp; academic advising</li><li>Research supervision</li></ul></div></div>
+        <div class="experience-card"><div class="experience-header"><div class="experience-icon"><i class="fas fa-users"></i></div><div class="experience-title"><h3>Teaching Assistant</h3><p class="experience-company">Previous University</p><p class="experience-period">2024 – 2026</p></div></div><div class="experience-content"><p>Supported senior faculty in delivering education.</p><ul class="experience-responsibilities"><li>Lab supervision &amp; practical sessions</li><li>Grading &amp; student feedback</li><li>Tutorial sessions</li></ul></div></div>
+        <div class="experience-card"><div class="experience-header"><div class="experience-icon"><i class="fas fa-code"></i></div><div class="experience-title"><h3>Software Developer</h3><p class="experience-company">EdTech Solutions</p><p class="experience-period">2024 – 2025</p></div></div><div class="experience-content"><p>Developed educational software &amp; learning platforms.</p><ul class="experience-responsibilities"><li>Educational software development</li><li>LMS integration</li><li>UX design for learning tools</li></ul></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEARCH -->
+  <section id="research">
+    <div class="container">
+      <div class="section-header"><h2>Research &amp; Publications</h2><div class="section-divider"></div><p class="section-subtitle">My scholarly work</p></div>
+      <div class="research-stats">
+        <div class="stat-card"><span class="stat-number">15+</span><span class="stat-label">Publications</span></div>
+        <div class="stat-card"><span class="stat-number">8+</span><span class="stat-label">Conference Papers</span></div>
+        <div class="stat-card"><span class="stat-number">5+</span><span class="stat-label">Research Projects</span></div>
+        <div class="stat-card"><span class="stat-number">12+</span><span class="stat-label">Citations</span></div>
+      </div>
+      <div class="publications-list"><h3 style="font-size:1.2rem; margin-bottom:16px; font-weight:600;">Recent Publications</h3>
+        <div class="publication-item"><div class="publication-icon"><i class="fas fa-book"></i></div><div class="publication-details"><h4>"Integrating AI in Higher Education"</h4><p class="publication-meta">Journal of EdTech | 2024</p><p>Explores AI tools in Ethiopian universities.</p></div></div>
+        <div class="publication-item"><div class="publication-icon"><i class="fas fa-file-alt"></i></div><div class="publication-details"><h4>"Digital Literacy for 21st Century Learners"</h4><p class="publication-meta">Int. Conference on Education | 2023</p><p>Digital literacy requirements in developing contexts.</p></div></div>
+        <div class="publication-item"><div class="publication-icon"><i class="fas fa-microscope"></i></div><div class="publication-details"><h4>"Mobile Learning for Rural Education"</h4><p class="publication-meta">Journal of Mobile Learning | 2023</p><p>Mobile technology for rural education in Ethiopia.</p></div></div>
+      </div>
+      <div class="research-interests"><h3 style="font-size:1.2rem; font-weight:600; margin-top:28px;">Research Interests</h3>
+        <div class="interests-grid">
+          <div class="interest-item"><i class="fas fa-brain"></i> AI in Education</div>
+          <div class="interest-item"><i class="fas fa-mobile-alt"></i> Mobile Learning</div>
+          <div class="interest-item"><i class="fas fa-users"></i> Educational Psychology</div>
+          <div class="interest-item"><i class="fas fa-globe"></i> Digital Divide</div>
+          <div class="interest-item"><i class="fas fa-code"></i> EdTech Development</div>
+          <div class="interest-item"><i class="fas fa-chart-line"></i> Learning Analytics</div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Education Section -->
-    <section id="education">
-        <div class="container">
-            <div class="section-header">
-                <h2>Education & Qualifications</h2>
-                <div class="section-divider"></div>
-                <p class="section-subtitle">My academic journey and professional qualifications</p>
-            </div>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-icon">
-                            <i class="fas fa-graduation-cap"></i>
-                        </div>
-                        <div class="timeline-text">
-                            <h3>I hope I learn PhD in Computer Science</h3>
-                            <p class="timeline-date">2018 - 2022</p>
-                            <p class="timeline-location">University Name, Country</p>
-                            <p>Thesis: "Advancing Digital Education Through Innovative Technologies"</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-icon">
-                            <i class="fas fa-university"></i>
-                        </div>
-                        <div class="timeline-text">
-                            <h3>First degree in Information Technology</h3>
-                            <p class="timeline-date">2020 - 2024</p>
-                            <p class="timeline-location">University Werabe, Ethiopia</p>
-                            <p>Specialized in Educational Technology and website Development</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-icon">
-                            <i class="fas fa-certificate"></i>
-                        </div>
-                        <div class="timeline-text">
-                            <h3>Bachelor's in Information Technology</h3>
-                            <p class="timeline-date">2020 - 2024</p>
-                            <p class="timeline-location">University Werabe, Ethiopia</p>
-                            <p>Graduated with First Class Honors</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <!-- SKILLS – with Python highlighted -->
+  <section id="skills">
+    <div class="container">
+      <div class="section-header"><h2>My Skills</h2><div class="section-divider"></div></div>
+      <div class="skills-grid">
+        <div class="skill-item python-highlight">
+          <div class="skill-info">
+            <h3><i class="fab fa-python"></i> Python</h3>
+            <div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div>
+          </div>
+          <span style="font-size:0.7rem; font-weight:600; color:#f59e0b; background:#fffbeb; padding:4px 12px; border-radius:40px;">Expert</span>
         </div>
-    </section>
-
-    <!-- Experience Section -->
-    <section id="experience">
-        <div class="container">
-            <div class="section-header">
-                <h2>Teaching Experience</h2>
-                <div class="section-divider"></div>
-                <p class="section-subtitle">My journey in academia and education</p>
-            </div>
-            <div class="experience-grid">
-                <div class="experience-card">
-                    <div class="experience-header">
-                        <div class="experience-icon">
-                            <i class="fas fa-chalkboard-teacher"></i>
-                        </div>
-                        <div class="experience-title">
-                            <h3>Lecturer</h3>
-                            <p class="experience-company">Werabe University</p>
-                            <p class="experience-period">2025 - Present</p>
-                        </div>
-                    </div>
-                    <div class="experience-content">
-                        <p>Teaching undergraduate and graduate courses in Information Technology, focusing on practical applications and industry-relevant skills.</p>
-                        <ul class="experience-responsibilities">
-                            <li>Course development and curriculum design</li>
-                            <li>Student mentoring and academic advising</li>
-                            <li>Research supervision and project guidance</li>
-                            <li>Industry-academia collaboration initiatives</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="experience-card">
-                    <div class="experience-header">
-                        <div class="experience-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <div class="experience-title">
-                            <h3>Teaching Assistant</h3>
-                            <p class="experience-company">Previous University</p>
-                            <p class="experience-period">2024 - 2026</p>
-                        </div>
-                    </div>
-                    <div class="experience-content">
-                        <p>Supported senior faculty in delivering high-quality education and assisted in various academic activities.</p>
-                        <ul class="experience-responsibilities">
-                            <li>Laboratory supervision and practical sessions</li>
-                            <li>Assignment grading and student feedback</li>
-                            <li>Tutorial sessions and doubt clearing</li>
-                            <li>Academic event coordination</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="experience-card">
-                    <div class="experience-header">
-                        <div class="experience-icon">
-                            <i class="fas fa-code"></i>
-                        </div>
-                        <div class="experience-title">
-                            <h3>Software Developer</h3>
-                            <p class="experience-company">no any relation with Company</p>
-                            <p class="experience-period">2024 - 2025</p>
-                        </div>
-                    </div>
-                    <div class="experience-content">
-                        <p>Developed educational software and digital learning platforms while maintaining teaching responsibilities.</p>
-                        <ul class="experience-responsibilities">
-                            <li>Educational software development</li>
-                            <li>Learning management system integration</li>
-                            <li>User experience design for educational tools</li>
-                            <li>Technical training and workshops</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+        <div class="skill-item">
+          <div class="skill-info">
+            <h3><i class="fab fa-html5"></i> HTML</h3>
+            <div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
+          </div>
         </div>
-    </section>
-
-    <!-- Research Section -->
-    <section id="research">
-        <div class="container">
-            <div class="section-header">
-                <h2>Research & Publications</h2>
-                <div class="section-divider"></div>
-                <p class="section-subtitle">My contributions to academic research and scholarly work</p>
-            </div>
-            <div class="research-content">
-                <div class="research-stats">
-                    <div class="stat-card">
-                        <div class="stat-number">15+</div>
-                        <div class="stat-label">Publications</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">8+</div>
-                        <div class="stat-label">Conference Papers</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">5+</div>
-                        <div class="stat-label">Research Projects</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">12+</div>
-                        <div class="stat-label">Citations</div>
-                    </div>
-                </div>
-
-                <div class="publications-list">
-                    <h3>Recent Publications</h3>
-                    <div class="publication-item">
-                        <div class="publication-icon">
-                            <i class="fas fa-book"></i>
-                        </div>
-                        <div class="publication-details">
-                            <h4>"Integrating AI in Higher Education: A Case Study from Ethiopian Universities"</h4>
-                            <p class="publication-meta">Journal of Educational Technology | 2024</p>
-                            <p>Explores the implementation of artificial intelligence tools in Ethiopian higher education institutions.</p>
-                        </div>
-                    </div>
-
-                    <div class="publication-item">
-                        <div class="publication-icon">
-                            <i class="fas fa-file-alt"></i>
-                        </div>
-                        <div class="publication-details">
-                            <h4>"Digital Literacy Skills for 21st Century Learners in Developing Countries"</h4>
-                            <p class="publication-meta">International Conference on Education | 2023</p>
-                            <p>Examines the digital literacy requirements and challenges in developing country contexts.</p>
-                        </div>
-                    </div>
-
-                    <div class="publication-item">
-                        <div class="publication-icon">
-                            <i class="fas fa-microscope"></i>
-                        </div>
-                        <div class="publication-details">
-                            <h4>"Mobile Learning Applications for Rural Education in Ethiopia"</h4>
-                            <p class="publication-meta">Journal of Mobile Learning | 2023</p>
-                            <p>Research on mobile technology applications for improving education in rural areas.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="research-interests">
-                    <h3>Research Interests</h3>
-                    <div class="interests-grid">
-                        <div class="interest-item">
-                            <i class="fas fa-brain"></i>
-                            <span>Artificial Intelligence in Education</span>
-                        </div>
-                        <div class="interest-item">
-                            <i class="fas fa-mobile-alt"></i>
-                            <span>Mobile Learning Technologies</span>
-                        </div>
-                        <div class="interest-item">
-                            <i class="fas fa-users"></i>
-                            <span>Educational Psychology</span>
-                        </div>
-                        <div class="interest-item">
-                            <i class="fas fa-globe"></i>
-                            <span>Digital Divide in Education</span>
-                        </div>
-                        <div class="interest-item">
-                            <i class="fas fa-code"></i>
-                            <span>Educational Software Development</span>
-                        </div>
-                        <div class="interest-item">
-                            <i class="fas fa-chart-line"></i>
-                            <span>Learning Analytics</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="skill-item">
+          <div class="skill-info">
+            <h3><i class="fab fa-css3-alt"></i> CSS</h3>
+            <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
+          </div>
         </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section id="testimonials">
-        <div class="container">
-            <div class="section-header">
-                <h2>What People Say</h2>
-                <div class="section-divider"></div>
-                <p class="section-subtitle">Testimonials from colleagues, students, and collaborators</p>
-            </div>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <div class="testimonial-quote">
-                            <i class="fas fa-quote-left"></i>
-                        </div>
-                        <p>"Dr. GUYO DIKA is an exceptional educator who combines deep knowledge with innovative teaching methods. His dedication to student success is truly inspiring."</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">
-                                <i class="fas fa-user-graduate"></i>
-                            </div>
-                            <div class="author-info">
-                                <h4>Sarah Johnson</h4>
-                                <p>Former Student, Computer Science</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <div class="testimonial-quote">
-                            <i class="fas fa-quote-left"></i>
-                        </div>
-                        <p>"Working with Mr. GUYO DIKA on research projects has been incredibly rewarding. His expertise in educational technology is unmatched."</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">
-                                <i class="fas fa-user-tie"></i>
-                            </div>
-                            <div class="author-info">
-                                <h4>Prof. Michael Chen</h4>
-                                <p>Colleague, Department of Education</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <div class="testimonial-quote">
-                            <i class="fas fa-quote-left"></i>
-                        </div>
-                        <p>"Dr. GUYO DIKA's commitment to bridging the digital divide in education through innovative solutions is commendable. A true leader in the field."</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">
-                                <i class="fas fa-user-md"></i>
-                            </div>
-                            <div class="author-info">
-                                <h4>Dr. Amina Hassan</h4>
-                                <p>Research Collaborator, UNESCO</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <div class="testimonial-quote">
-                            <i class="fas fa-quote-left"></i>
-                        </div>
-                        <p>"As a student under Mr. GUYO DIKA's guidance, I learned not just technical skills but also the importance of ethical technology use in education."</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">
-                                <i class="fas fa-user"></i>
-                            </div>
-                            <div class="author-info">
-                                <h4>Ahmed Mohamed</h4>
-                                <p>Graduate Student, IT Department</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <div class="testimonial-quote">
-                            <i class="fas fa-quote-left"></i>
-                        </div>
-                        <p>"Dr. GUYO DIKA's research on mobile learning has directly impacted our rural education initiatives. His work is making a real difference."</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">
-                                <i class="fas fa-building"></i>
-                            </div>
-                            <div class="author-info">
-                                <h4>Educational NGO Director</h4>
-                                <p>Partner Organization</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <div class="testimonial-quote">
-                            <i class="fas fa-quote-left"></i>
-                        </div>
-                        <p>"His passion for teaching and research excellence sets a high standard for all faculty members. An invaluable asset to Werabe University."</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">
-                                <i class="fas fa-university"></i>
-                            </div>
-                            <div class="author-info">
-                                <h4>Dean of Faculty</h4>
-                                <p>Werabe University</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="skill-item">
+          <div class="skill-info">
+            <h3><i class="fab fa-js"></i> JavaScript</h3>
+            <div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div>
+          </div>
         </div>
-    </section>
-
-    <section id="skills">
-        <div class="container">
-            <h2>My Skills</h2>
-            <div class="skills-grid">
-                <div class="skill-item">
-                    <h3>HTML</h3>
-                    <div class="skill-bar">
-                        <div class="skill-fill" style="width: 90%"></div>
-                    </div>
-                </div>
-                <div class="skill-item">
-                    <h3>CSS</h3>
-                    <div class="skill-bar">
-                        <div class="skill-fill" style="width: 85%"></div>
-                    </div>
-                </div>
-                <div class="skill-item">
-                    <h3>JavaScript</h3>
-                    <div class="skill-bar">
-                        <div class="skill-fill" style="width: 80%"></div>
-                    </div>
-                </div>
-                <div class="skill-item">
-                    <h3>React</h3>
-                    <div class="skill-bar">
-                        <div class="skill-fill" style="width: 75%"></div>
-                    </div>
-                </div>
-                <div class="skill-item">
-                    <h3>Node.js</h3>
-                    <div class="skill-bar">
-                        <div class="skill-fill" style="width: 70%"></div>
-                    </div>
-                </div>
-                <div class="skill-item">
-                    <h3>Python</h3>
-                    <div class="skill-bar">
-                        <div class="skill-fill" style="width: 65%"></div>
-                    </div>
-                </div>
-            </div>
+        <div class="skill-item">
+          <div class="skill-info">
+            <h3><i class="fab fa-react"></i> React</h3>
+            <div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div>
+          </div>
         </div>
-    </section>
-
-    <section id="projects">
-        <div class="container">
-            <h2>My Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <img src="1759927775643.jpg" alt="Project 1">
-                    <h3>Project Title 1</h3>
-                    <p>Description of project 1. This is a brief overview of what the project does and the technologies used.</p>
-                    <div class="project-links">
-                        <a href="#" class="btn">Live Demo</a>
-                        <a href="#" class="btn">Source Code</a>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <img src="1762684109749.jpg" alt="Project 2">
-                    <h3>Project Title 2</h3>
-                    <p>Description of project 2. This is a brief overview of what the project does and the technologies used.</p>
-                    <div class="project-links">
-                        <a href="#" class="btn">Live Demo</a>
-                        <a href="#" class="btn">Source Code</a>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <img src="1759927775643.jpg" alt="Project 3">
-                    <h3>Project Title 3</h3>
-                    <p>Description of project 3. This is a brief overview of what the project does and the technologies used.</p>
-                    <div class="project-links">
-                        <a href="#" class="btn">Live Demo</a>
-                        <a href="#" class="btn">Source Code</a>
-                    </div>
-                </div>
-            </div>
+        <div class="skill-item">
+          <div class="skill-info">
+            <h3><i class="fab fa-node"></i> Node.js</h3>
+            <div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <section id="contact">
-        <div class="container">
-            <div class="section-header">
-                <h2>Get In Touch</h2>
-                <div class="section-divider"></div>
-                <p class="section-subtitle">Let's connect and create something amazing together</p>
-            </div>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="contact-intro">
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope-open-text"></i>
-                        </div>
-                        <h3>Let's Start a Conversation</h3>
-                        <p>I'm always excited to discuss new opportunities, collaborations, or just have a friendly chat about technology and education.</p>
-                    </div>
-
-                    <div class="contact-details">
-                        <div class="detail-card">
-                            <div class="detail-icon">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <div class="detail-content">
-                                <h4>Email</h4>
-                                <p>Guyodika6891@gmail.com</p>
-                            </div>
-                        </div>
-
-                        <div class="detail-card">
-                            <div class="detail-icon">
-                                <i class="fas fa-phone"></i>
-                            </div>
-                            <div class="detail-content">
-                                <h4>Phone</h4>
-                                <p>+251 9XX XXX XXX</p>
-                            </div>
-                        </div>
-
-                        <div class="detail-card">
-                            <div class="detail-icon">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
-                            <div class="detail-content">
-                                <h4>Location</h4>
-                                <p>Werabe City & Mega City, Ethiopia</p>
-                            </div>
-                        </div>
-
-                        <div class="detail-card">
-                            <div class="detail-icon">
-                                <i class="fas fa-graduation-cap"></i>
-                            </div>
-                            <div class="detail-content">
-                                <h4>Position</h4>
-                                <p>Lecturer at Werabe University</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="social-section">
-                        <h4>Connect With Me</h4>
-                        <div class="social-links">
-                            <a href="#" class="social-link linkedin" title="LinkedIn">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                            <a href="#" class="social-link github" title="GitHub">
-                                <i class="fab fa-github"></i>
-                            </a>
-                            <a href="#" class="social-link twitter" title="Twitter">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a href="#" class="social-link facebook" title="Facebook">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                            <a href="#" class="social-link instagram" title="Instagram">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                            <a href="#" class="social-link google" title="Google Scholar">
-                                <i class="fab fa-google"></i>
-                            </a>
-                            <a href="#" class="social-link researchgate" title="ResearchGate">
-                                <i class="fab fa-researchgate"></i>
-                            </a>
-                            <a href="#" class="social-link whatsapp" title="WhatsApp">
-                                <i class="fab fa-whatsapp"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="availability-status">
-                        <div class="status-indicator">
-                            <div class="status-dot"></div>
-                            <span>Available for collaborations</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="contact-form-container">
-                    <div class="form-header">
-                        <h3>Send Me a Message</h3>
-                        <p>Fill out the form below and I'll get back to you soon!</p>
-                    </div>
-
-                    <form class="contact-form">
-                        <div class="form-group">
-                            <label for="name">Full Name</label>
-                            <input type="text" id="name" name="name" placeholder="Your Full Name" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input type="text" id="subject" name="subject" placeholder="What's this about?" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" placeholder="Tell me about your project or just say hello..." required></textarea>
-                        </div>
-
-                        <button type="submit" class="submit-btn">
-                            <span>Send Message</span>
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
-                    </form>
-                </div>
-            </div>
+  <!-- PROJECTS – custom two projects -->
+  <section id="projects">
+    <div class="container">
+      <div class="section-header"><h2>My Projects</h2><div class="section-divider"></div></div>
+      <div class="projects-grid">
+        <div class="project-card">
+          <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&h=400&fit=crop" alt="Online Examinations System">
+          <h3>Online Examinations System</h3>
+          <span class="project-tag">Web Application</span>
+          <p>A secure and scalable platform for conducting online exams with real-time proctoring, automated grading, and detailed analytics. Built with Python (Django) and React.</p>
+          <div class="project-links">
+            <a href="#" class="btn btn-primary"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+            <a href="#" class="btn"><i class="fab fa-github"></i> Source</a>
+          </div>
         </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>GUYO DIKA</h3>
-                    <p>Lecturer at Werabe University<br>Specializing in Computer Science & Educational Technology</p>
-                    <div class="footer-social">
-                        <a href="#" class="social-link linkedin"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="social-link github"><i class="fab fa-github"></i></a>
-                        <a href="#" class="social-link twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-link facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-link instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-link google"><i class="fab fa-google"></i></a>
-                        <a href="#" class="social-link researchgate"><i class="fab fa-researchgate"></i></a>
-                        <a href="#" class="social-link whatsapp"><i class="fab fa-whatsapp"></i></a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul class="footer-links">
-                        <li><a href="#hero">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#education">Education</a></li>
-                        <li><a href="#experience">Experience</a></li>
-                        <li><a href="#research">Research</a></li>
-                        <li><a href="#skills">Skills</a></li>
-                        <li><a href="#projects">Projects</a></li>
-                        <li><a href="#testimonials">Testimonials</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Contact Info</h4>
-                    <div class="footer-contact">
-                        <p><i class="fas fa-map-marker-alt"></i> Werabe/Mega City, Borana Zone, Ethiopia</p>
-                        <p><i class="fas fa-envelope"></i> guyodika@werabeuniversity.edu.et</p>
-                        <p><i class="fas fa-phone"></i> +251 XXX XXX XXX</p>
-                        <p><i class="fas fa-university"></i> Werabe University</p>
-                    </div>
-                    <div class="footer-actions">
-                        <a href="#" class="cv-download-btn">
-                            <i class="fas fa-download"></i> Download CV
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 GUYO DIKA. All rights reserved. | Designed with <i class="fas fa-heart"></i> for education</p>
-            </div>
+        <div class="project-card">
+          <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=400&fit=crop" alt="Digital Clearance System">
+          <h3>Digital Clearance System</h3>
+          <span class="project-tag">Graduate Student Tool</span>
+          <p>A comprehensive digital clearance system for graduating students, streamlining the clearance workflow across departments. Features real-time status tracking and notifications.</p>
+          <div class="project-links">
+            <a href="#" class="btn btn-primary"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+            <a href="#" class="btn"><i class="fab fa-github"></i> Source</a>
+          </div>
         </div>
-    </footer>
+      </div>
+    </div>
+  </section>
 
-    <!-- Back to Top Button -->
-    <button id="backToTop" class="back-to-top">
-        <i class="fas fa-arrow-up"></i>
-    </button>
+  <!-- TESTIMONIALS -->
+  <section id="testimonials">
+    <div class="container">
+      <div class="section-header"><h2>Testimonials</h2><div class="section-divider"></div><p class="section-subtitle">What people say</p></div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card"><div class="testimonial-quote"><i class="fas fa-quote-left"></i></div><p>"An exceptional educator who combines deep knowledge with innovative methods."</p><div class="testimonial-author"><div class="author-avatar"><i class="fas fa-user-graduate"></i></div><div class="author-info"><h4>Sarah Johnson</h4><p>Former Student</p></div></div></div>
+        <div class="testimonial-card"><div class="testimonial-quote"><i class="fas fa-quote-left"></i></div><p>"His expertise in educational technology is unmatched. A true leader."</p><div class="testimonial-author"><div class="author-avatar"><i class="fas fa-user-tie"></i></div><div class="author-info"><h4>Prof. Michael Chen</h4><p>Colleague</p></div></div></div>
+        <div class="testimonial-card"><div class="testimonial-quote"><i class="fas fa-quote-left"></i></div><p>"Committed to bridging the digital divide through innovative solutions."</p><div class="testimonial-author"><div class="author-avatar"><i class="fas fa-user-md"></i></div><div class="author-info"><h4>Dr. Amina Hassan</h4><p>UNESCO collaborator</p></div></div></div>
+        <div class="testimonial-card"><div class="testimonial-quote"><i class="fas fa-quote-left"></i></div><p>"I learned not just technical skills but also ethical technology use."</p><div class="testimonial-author"><div class="author-avatar"><i class="fas fa-user"></i></div><div class="author-info"><h4>Ahmed Mohamed</h4><p>Graduate Student</p></div></div></div>
+      </div>
+    </div>
+  </section>
 
-    <script>
-        // Loading animation
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                document.getElementById('loading').classList.add('hidden');
-            }, 1000);
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-header"><h2>Get In Touch</h2><div class="section-divider"></div><p class="section-subtitle">Let's connect</p></div>
+      <div class="contact-content">
+        <div class="contact-info">
+          <div class="contact-icon"><i class="fas fa-envelope-open-text"></i></div>
+          <div class="contact-intro"><h3>Start a Conversation</h3><p>I'm always excited to discuss new opportunities, collaborations, or just chat.</p></div>
+          <div class="contact-details">
+            <div class="detail-card"><div class="detail-icon"><i class="fas fa-envelope"></i></div><div><h4>Email</h4><p>Guyodika6891@gmail.com</p></div></div>
+            <div class="detail-card"><div class="detail-icon"><i class="fas fa-phone"></i></div><div><h4>Phone</h4><p>+251 9XX XXX XXX</p></div></div>
+            <div class="detail-card"><div class="detail-icon"><i class="fas fa-map-marker-alt"></i></div><div><h4>Location</h4><p>Werabe &amp; Mega City</p></div></div>
+            <div class="detail-card"><div class="detail-icon"><i class="fas fa-graduation-cap"></i></div><div><h4>Position</h4><p>Lecturer at Werabe University</p></div></div>
+          </div>
+          <div class="social-section"><h4 style="margin-top: 8px;">Connect With Me</h4><div class="social-links">
+            <a href="#" class="social-link linkedin"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="social-link github"><i class="fab fa-github"></i></a>
+            <a href="#" class="social-link twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link google"><i class="fab fa-google"></i></a>
+            <a href="#" class="social-link researchgate"><i class="fab fa-researchgate"></i></a>
+            <a href="#" class="social-link whatsapp"><i class="fab fa-whatsapp"></i></a>
+          </div></div>
+        </div>
+        <div class="contact-form-container">
+          <div class="form-header"><h3>Send a Message</h3><p>Fill out the form and I'll get back soon.</p></div>
+          <form class="contact-form"><div class="form-group"><label>Full Name</label><input type="text" placeholder="Your Full Name" required></div><div class="form-group"><label>Email</label><input type="email" placeholder="your.email@example.com" required></div><div class="form-group"><label>Subject</label><input type="text" placeholder="What's this about?" required></div><div class="form-group"><label>Message</label><textarea placeholder="Tell me about your project..."></textarea></div><button type="submit" class="submit-btn"><span>Send Message</span> <i class="fas fa-paper-plane"></i></button></form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section"><h3>GUYO DIKA</h3><p>Lecturer at Werabe University<br>Specializing in Computer Science &amp; EdTech</p><div class="footer-social"><a href="#" class="social-link linkedin"><i class="fab fa-linkedin-in"></i></a><a href="#" class="social-link github"><i class="fab fa-github"></i></a><a href="#" class="social-link twitter"><i class="fab fa-twitter"></i></a><a href="#" class="social-link facebook"><i class="fab fa-facebook-f"></i></a><a href="#" class="social-link instagram"><i class="fab fa-instagram"></i></a></div></div>
+        <div class="footer-section"><h4>Quick Links</h4><ul class="footer-links"><li><a href="#about">About</a></li><li><a href="#education">Education</a></li><li><a href="#experience">Experience</a></li><li><a href="#research">Research</a></li><li><a href="#skills">Skills</a></li><li><a href="#projects">Projects</a></li><li><a href="#testimonials">Testimonials</a></li><li><a href="#contact">Contact</a></li></ul></div>
+        <div class="footer-section"><h4>Contact Info</h4><div class="footer-contact"><p><i class="fas fa-map-marker-alt"></i> Werabe/Mega City, Ethiopia</p><p><i class="fas fa-envelope"></i> guyodika@werabeuniversity.edu.et</p><p><i class="fas fa-phone"></i> +251 XXX XXX XXX</p></div><div class="footer-actions"><a href="#" class="cv-download-btn"><i class="fas fa-download"></i> Download CV</a></div></div>
+      </div>
+      <div class="footer-bottom"><p>&copy; 2025 GUYO DIKA · Designed with <i class="fas fa-heart" style="color:#f87171;"></i> for education</p></div>
+    </div>
+  </footer>
+
+  <button id="backToTop" class="back-to-top"><i class="fas fa-arrow-up"></i></button>
+
+  <script>
+    (function() {
+      window.addEventListener('load', () => setTimeout(() => document.getElementById('loading').classList.add('hidden'), 700));
+
+      const header = document.querySelector('header');
+      window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 40));
+
+      const toggle = document.getElementById('menuToggle');
+      const mobileMenu = document.getElementById('mobileMenu');
+      toggle.addEventListener('click', () => { toggle.classList.toggle('active'); mobileMenu.classList.toggle('active'); });
+      document.querySelectorAll('.mobile-menu a, .nav-links a').forEach(link => link.addEventListener('click', () => {
+        toggle.classList.remove('active');
+        mobileMenu.classList.remove('active');
+      }));
+
+      const nameEl = document.getElementById('typed-name');
+      const fullName = 'GUYO DIKA';
+      let idx = 0;
+      function typeName() {
+        if (idx < fullName.length) { nameEl.textContent += fullName.charAt(idx); idx++; setTimeout(typeName, 90); }
+        else { nameEl.classList.add('typing-done'); }
+      }
+      setTimeout(typeName, 400);
+
+      const topBtn = document.getElementById('backToTop');
+      window.addEventListener('scroll', () => topBtn.classList.toggle('show', window.scrollY > 280));
+      topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+      const fills = document.querySelectorAll('.skill-fill');
+      function animateSkills() {
+        const winH = window.innerHeight;
+        fills.forEach(bar => {
+          const rect = bar.getBoundingClientRect();
+          if (rect.top < winH - 40 && rect.bottom > 0) {
+            const w = bar.style.width;
+            if (w === '0%' || w === '') bar.style.width = bar.getAttribute('data-width') || bar.style.width;
+          }
         });
+      }
+      fills.forEach(b => { const w = b.style.width; if (w) b.setAttribute('data-width', w); b.style.width = '0%'; });
+      window.addEventListener('scroll', animateSkills);
+      setTimeout(animateSkills, 300);
 
-        // Header scroll effect
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.nav-links a, .mobile-menu a');
+      window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+          const top = section.offsetTop - 100;
+          if (window.scrollY >= top) current = section.getAttribute('id');
         });
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                const headerOffset = 80;
-                const elementPosition = target.offsetTop;
-                const offsetPosition = elementPosition - headerOffset;
-
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
-            });
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + current) link.classList.add('active');
         });
-
-        // Animate skill bars on scroll
-        const skillBars = document.querySelectorAll('.skill-fill');
-        const animateSkills = () => {
-            skillBars.forEach(bar => {
-                const barTop = bar.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-                if (barTop < windowHeight - 50) {
-                    bar.style.width = bar.style.width || '0%';
-                }
-            });
-        };
-
-        window.addEventListener('scroll', animateSkills);
-        animateSkills(); // Initial check
-
-        // Add hover effect to project cards
-        document.querySelectorAll('.project-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-15px) scale(1.02)';
-            });
-
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
-        });
-
-        // Typing effect for hero text (optional enhancement)
-        const heroText = document.querySelector('.hero-text h2');
-        if (heroText) {
-            const text = heroText.textContent;
-            heroText.textContent = '';
-            let i = 0;
-            const typeWriter = () => {
-                if (i < text.length) {
-                    heroText.textContent += text.charAt(i);
-                    i++;
-                    setTimeout(typeWriter, 50);
-                }
-            };
-            setTimeout(typeWriter, 1000);
-        }
-
-        // Typing effect for name
-        const typedName = document.getElementById('typed-name');
-        const nameText = 'GUYO DIKA';
-        let nameIndex = 0;
-        const typeName = () => {
-            if (nameIndex < nameText.length) {
-                typedName.textContent += nameText.charAt(nameIndex);
-                nameIndex++;
-                setTimeout(typeName, 100);
-            } else {
-                // Add glow effect after typing
-                typedName.classList.add('typing-done');
-                typedName.style.animation = 'glow 2s ease-in-out infinite alternate';
-            }
-        };
-        setTimeout(typeName, 500);
-
-        // Particles.js background effect
-        particlesJS('hero', {
-            particles: {
-                number: { value: 80, density: { enable: true, value_area: 800 } },
-                color: { value: '#ffffff' },
-                shape: { type: 'circle' },
-                opacity: { value: 0.5, random: true },
-                size: { value: 3, random: true },
-                line_linked: {
-                    enable: true,
-                    distance: 150,
-                    color: '#ffffff',
-                    opacity: 0.4,
-                    width: 1
-                },
-                move: {
-                    enable: true,
-                    speed: 2,
-                    direction: 'none',
-                    random: true,
-                    straight: false,
-                    out_mode: 'out',
-                    bounce: false
-                }
-            },
-            interactivity: {
-                detect_on: 'canvas',
-                events: {
-                    onhover: { enable: true, mode: 'repulse' },
-                    onclick: { enable: true, mode: 'push' },
-                    resize: true
-                }
-            },
-            retina_detect: true
-        });
-
-        // Back to Top Button functionality
-        const backToTopBtn = document.getElementById('backToTop');
-
-        window.addEventListener('scroll', function() {
-            if (window.scrollY > 300) {
-                backToTopBtn.classList.add('show');
-            } else {
-                backToTopBtn.classList.remove('show');
-            }
-        });
-
-        backToTopBtn.addEventListener('click', function() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-
-        // Animate sections on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe all sections for animation
-        document.querySelectorAll('section').forEach(section => {
-            section.style.opacity = '0';
-            section.style.transform = 'translateY(30px)';
-            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(section);
-        });
-
-        // Mobile menu toggle functionality
-        const menuToggle = document.getElementById('menuToggle');
-        const navMenu = document.getElementById('navMenu');
-
-        menuToggle.addEventListener('click', function() {
-            this.classList.toggle('active');
-            navMenu.classList.toggle('active');
-        });
-
-        // Close mobile menu when clicking on a link
-        document.querySelectorAll('#navMenu a').forEach(link => {
-            link.addEventListener('click', function() {
-                menuToggle.classList.remove('active');
-                navMenu.classList.remove('active');
-            });
-        });
-
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function(event) {
-            if (!event.target.closest('nav') && navMenu.classList.contains('active')) {
-                menuToggle.classList.remove('active');
-                navMenu.classList.remove('active');
-            }
-        });
-    </script>
+      });
+    })();
+  </script>
 </body>
 </html>
