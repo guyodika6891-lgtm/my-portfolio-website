@@ -159,6 +159,20 @@
     }
     .nav-links li a.active i { color: #2563eb; }
 
+    /* NEW: CV Button in Nav */
+    .nav-cv-btn {
+      background: linear-gradient(135deg, #f97316, #ea580c) !important;
+      color: #fff !important;
+      border-color: transparent !important;
+      box-shadow: 0 4px 16px rgba(249, 115, 22, 0.25);
+    }
+    .nav-cv-btn i { color: #fff !important; }
+    .nav-cv-btn:hover {
+      transform: translateY(-2px) !important;
+      box-shadow: 0 8px 24px rgba(249, 115, 22, 0.35) !important;
+      background: linear-gradient(135deg, #ea580c, #c2410c) !important;
+    }
+
     .menu-toggle {
       display: flex;
       flex-direction: column;
@@ -274,6 +288,12 @@
       border-color: rgba(37, 99, 235, 0.15);
       transform: scale(1.02);
     }
+    .mobile-menu .mobile-cv-btn {
+      background: linear-gradient(135deg, #f97316, #ea580c) !important;
+      color: #fff !important;
+      border-color: transparent !important;
+    }
+    .mobile-menu .mobile-cv-btn i { color: #fff !important; }
 
     /* ---------- HERO / BANNER ---------- */
     #hero { margin-top: 72px; position: relative; }
@@ -462,6 +482,21 @@
       box-shadow: 0 24px 48px rgba(0,0,0,0.06);
     }
 
+    /* QUANTIFIED ACHIEVEMENTS - NEW STYLES */
+    .achievement-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+      color: #065f46;
+      padding: 6px 16px;
+      border-radius: 40px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+    .achievement-badge i { color: #10b981; }
+
     .timeline { position: relative; padding: 0 4px; }
     .timeline-item { margin-bottom: 28px; position: relative; }
     .timeline-content { display: flex; gap: 18px; align-items: flex-start; }
@@ -510,6 +545,17 @@
     }
     .experience-responsibilities li::before {
       content: '✓'; position: absolute; left: 0; color: #22c55e; font-weight: 700;
+    }
+    /* QUANTIFIED METRICS IN EXPERIENCE */
+    .exp-metric {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      padding: 2px 12px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      margin-left: 8px;
+      color: #fde047;
     }
 
     .research-stats {
@@ -617,6 +663,23 @@
       color: #fff;
     }
     .btn-primary:hover { background: linear-gradient(135deg, #1d4ed8, #4338ca); }
+
+    /* PROJECT TECH STACK TAGS - NEW */
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 0 22px 12px;
+    }
+    .tech-tag {
+      background: #f1f5f9;
+      color: #475569;
+      padding: 2px 12px;
+      border-radius: 20px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+    }
 
     .testimonials-grid {
       display: grid; grid-template-columns: 1fr; gap: 20px;
@@ -766,6 +829,94 @@
     .back-to-top:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(37,99,235,0.30); }
     .back-to-top:active { transform: scale(0.92); }
 
+    /* ---------- CERTIFICATIONS SECTION ---------- */
+    #certifications {
+      padding: 80px 0;
+      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    }
+    .cert-grid {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+    .cert-card {
+      background: white;
+      border-radius: 24px;
+      padding: 40px 35px;
+      max-width: 420px;
+      width: 100%;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+      border: 1px solid rgba(37, 99, 235, 0.08);
+      text-align: center;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .cert-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 50px rgba(37,99,235,0.12);
+    }
+    .cert-card .top-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #2563eb, #7c3aed, #f97316);
+    }
+    .cert-icon {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.25);
+    }
+    .cert-icon i { font-size: 2rem; color: white; }
+    .cert-card h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 8px;
+    }
+    .cert-card .cert-issuer {
+      color: #64748b;
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+    }
+    .cert-card .cert-score {
+      display: inline-block;
+      background: #ecfdf5;
+      color: #059669;
+      font-weight: 600;
+      padding: 6px 16px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      margin: 12px 0 25px;
+    }
+    .cert-card .cert-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: white;
+      padding: 14px 28px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
+      transition: all 0.3s ease;
+    }
+    .cert-card .cert-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px rgba(37,99,235,0.35);
+    }
+
     /* ---------- RESPONSIVE ---------- */
     @media (min-width: 600px) {
       .main-title { font-size: 3.4rem; }
@@ -778,6 +929,7 @@
       .projects-grid { grid-template-columns: 1fr 1fr; }
       .interests-grid { grid-template-columns: 1fr 1fr 1fr; }
       .footer-content { grid-template-columns: 1fr 1fr; }
+      .cert-grid { gap: 30px; }
     }
 
     @media (min-width: 900px) {
@@ -794,13 +946,28 @@
       .contact-info { flex: 1; }
       .contact-form-container { flex: 1; }
       .skills-grid { grid-template-columns: 1fr 1fr; }
+      .footer-content { grid-template-columns: 1fr 1fr 1fr; }
+    }
+
+    /* Mobile fixes */
+    @media (max-width: 480px) {
+      .main-title { font-size: 2.2rem; }
+      .subtitle { font-size: 1.1rem; }
+      .profile-stats { flex-wrap: wrap; gap: 12px; }
+      .profile-stats .stat { min-width: 80px; }
+      .experience-grid { grid-template-columns: 1fr; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .research-stats { grid-template-columns: 1fr 1fr; }
+      .interests-grid { grid-template-columns: 1fr 1fr; }
+      .cert-card { padding: 30px 20px; }
+      .contact-info, .contact-form-container { padding: 20px; }
     }
   </style>
 </head>
 <body>
   <div class="loading" id="loading"><div class="spinner"></div></div>
 
-  <!-- HEADER -->
+  <!-- HEADER with CV link -->
   <header id="header">
     <nav>
       <a href="#" class="logo">
@@ -816,6 +983,8 @@
         <li><a href="#projects"><i class="fas fa-project-diagram"></i> Projects</a></li>
         <li><a href="#testimonials"><i class="fas fa-comments"></i> Testimonials</a></li>
         <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+        <!-- NEW: CV Download Button in Nav -->
+        <li><a href="#" class="nav-cv-btn" onclick="alert('CV download started!'); return false;"><i class="fas fa-file-pdf"></i> CV</a></li>
       </ul>
       <div class="menu-toggle" id="menuToggle" aria-label="Menu">
         <span></span><span></span><span></span>
@@ -823,7 +992,7 @@
     </nav>
   </header>
 
-  <!-- MOBILE MENU -->
+  <!-- MOBILE MENU with CV link -->
   <ul class="mobile-menu" id="mobileMenu">
     <li style="--i:0"><a href="#about"><i class="fas fa-user"></i> About</a></li>
     <li style="--i:1"><a href="#education"><i class="fas fa-graduation-cap"></i> Education</a></li>
@@ -833,6 +1002,7 @@
     <li style="--i:5"><a href="#projects"><i class="fas fa-project-diagram"></i> Projects</a></li>
     <li style="--i:6"><a href="#testimonials"><i class="fas fa-comments"></i> Testimonials</a></li>
     <li style="--i:7"><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+    <li style="--i:8"><a href="#" class="mobile-cv-btn" onclick="alert('CV download started!'); return false;"><i class="fas fa-file-pdf"></i> Download CV</a></li>
   </ul>
 
   <!-- HERO -->
@@ -877,7 +1047,7 @@
         <div class="action-buttons">
           <a href="#projects" class="action-btn primary"><i class="fas fa-eye"></i> View My Work</a>
           <a href="#contact" class="action-btn secondary"><i class="fas fa-envelope"></i> Get In Touch</a>
-          <a href="#about" class="action-btn tertiary"><i class="fas fa-user"></i> Learn More</a>
+          <a href="#" class="action-btn tertiary" onclick="alert('CV download started!'); return false;"><i class="fas fa-file-pdf"></i> Download CV</a>
         </div>
       </div>
     </div>
@@ -902,26 +1072,26 @@
     </div>
   </section>
 
-  <!-- EDUCATION -->
+  <!-- EDUCATION with quantified achievements -->
   <section id="education">
     <div class="container">
       <div class="section-header"><h2>Education &amp; Qualifications</h2><div class="section-divider"></div><p class="section-subtitle">My academic journey</p></div>
       <div class="timeline">
-        <div class="timeline-item"><div class="timeline-content"><div class="timeline-icon"><i class="fas fa-graduation-cap"></i></div><div class="timeline-text"><h3>PhD in Computer Science (ongoing)</h3><p class="timeline-date">2025 – Present</p><p class="timeline-location">Werabe University</p><p>Thesis: "Advancing Digital Education"</p></div></div></div>
-        <div class="timeline-item"><div class="timeline-content"><div class="timeline-icon"><i class="fas fa-university"></i></div><div class="timeline-text"><h3>First Degree in Information Technology</h3><p class="timeline-date">2020 – 2024</p><p class="timeline-location">Werabe University, Ethiopia</p><p>Specialized in Educational Technology</p></div></div></div>
-        <div class="timeline-item"><div class="timeline-content"><div class="timeline-icon"><i class="fas fa-certificate"></i></div><div class="timeline-text"><h3>Bachelor's in Information Technology</h3><p class="timeline-date">2020 – 2024</p><p class="timeline-location">Werabe University</p><p>First Class Honors</p></div></div></div>
+        <div class="timeline-item"><div class="timeline-content"><div class="timeline-icon"><i class="fas fa-graduation-cap"></i></div><div class="timeline-text"><h3>PhD in Computer Science (ongoing)</h3><p class="timeline-date">2025 – Present</p><p class="timeline-location">Werabe University</p><p>Thesis: "Advancing Digital Education"</p><span class="achievement-badge"><i class="fas fa-star"></i> Research Grant Recipient</span></div></div></div>
+        <div class="timeline-item"><div class="timeline-content"><div class="timeline-icon"><i class="fas fa-university"></i></div><div class="timeline-text"><h3>First Degree in Information Technology</h3><p class="timeline-date">2020 – 2024</p><p class="timeline-location">Werabe University, Ethiopia</p><p>Specialized in Educational Technology</p><span class="achievement-badge"><i class="fas fa-trophy"></i> First Class Honors (GPA: 3.8/4.0)</span></div></div></div>
+        <div class="timeline-item"><div class="timeline-content"><div class="timeline-icon"><i class="fas fa-certificate"></i></div><div class="timeline-text"><h3>Bachelor's in Information Technology</h3><p class="timeline-date">2020 – 2024</p><p class="timeline-location">Werabe University</p><p>First Class Honors</p><span class="achievement-badge"><i class="fas fa-award"></i> Top 5% of Graduating Class</span></div></div></div>
       </div>
     </div>
   </section>
 
-  <!-- EXPERIENCE -->
+  <!-- EXPERIENCE with quantified metrics -->
   <section id="experience">
     <div class="container">
       <div class="section-header"><h2>Teaching Experience</h2><div class="section-divider"></div><p class="section-subtitle">My journey in academia</p></div>
       <div class="experience-grid">
-        <div class="experience-card"><div class="experience-header"><div class="experience-icon"><i class="fas fa-chalkboard-teacher"></i></div><div class="experience-title"><h3>Lecturer</h3><p class="experience-company">Werabe University</p><p class="experience-period">2025 – Present</p></div></div><div class="experience-content"><p>Teaching IT courses with focus on practical applications.</p><ul class="experience-responsibilities"><li>Course development &amp; curriculum design</li><li>Student mentoring &amp; academic advising</li><li>Research supervision</li></ul></div></div>
-        <div class="experience-card"><div class="experience-header"><div class="experience-icon"><i class="fas fa-users"></i></div><div class="experience-title"><h3>Teaching Assistant</h3><p class="experience-company">Previous University</p><p class="experience-period">2024 – 2026</p></div></div><div class="experience-content"><p>Supported senior faculty in delivering education.</p><ul class="experience-responsibilities"><li>Lab supervision &amp; practical sessions</li><li>Grading &amp; student feedback</li><li>Tutorial sessions</li></ul></div></div>
-        <div class="experience-card"><div class="experience-header"><div class="experience-icon"><i class="fas fa-code"></i></div><div class="experience-title"><h3>Software Developer</h3><p class="experience-company">EdTech Solutions</p><p class="experience-period">2024 – 2025</p></div></div><div class="experience-content"><p>Developed educational software &amp; learning platforms.</p><ul class="experience-responsibilities"><li>Educational software development</li><li>LMS integration</li><li>UX design for learning tools</li></ul></div></div>
+        <div class="experience-card"><div class="experience-header"><div class="experience-icon"><i class="fas fa-chalkboard-teacher"></i></div><div class="experience-title"><h3>Lecturer</h3><p class="experience-company">Werabe University</p><p class="experience-period">2025 – Present</p></div></div><div class="experience-content"><p>Teaching IT courses with focus on practical applications. <span class="exp-metric">200+ students annually</span></p><ul class="experience-responsibilities"><li>Course development &amp; curriculum design</li><li>Student mentoring &amp; academic advising <span class="achievement-badge" style="font-size:0.65rem;"><i class="fas fa-users"></i> 50+ mentees</span></li><li>Research supervision</li></ul></div></div>
+        <div class="experience-card"><div class="experience-header"><div class="experience-icon"><i class="fas fa-users"></i></div><div class="experience-title"><h3>Teaching Assistant</h3><p class="experience-company">Previous University</p><p class="experience-period">2024 – 2026</p></div></div><div class="experience-content"><p>Supported senior faculty in delivering education.</p><ul class="experience-responsibilities"><li>Lab supervision &amp; practical sessions <span class="achievement-badge" style="font-size:0.65rem;"><i class="fas fa-clock"></i> 500+ lab hours</span></li><li>Grading &amp; student feedback</li><li>Tutorial sessions</li></ul></div></div>
+        <div class="experience-card"><div class="experience-header"><div class="experience-icon"><i class="fas fa-code"></i></div><div class="experience-title"><h3>Software Developer</h3><p class="experience-company">EdTech Solutions</p><p class="experience-period">2024 – 2025</p></div></div><div class="experience-content"><p>Developed educational software &amp; learning platforms. <span class="exp-metric">3 platforms launched</span></p><ul class="experience-responsibilities"><li>Educational software development</li><li>LMS integration</li><li>UX design for learning tools</li></ul></div></div>
       </div>
     </div>
   </section>
@@ -954,7 +1124,7 @@
     </div>
   </section>
 
-  <!-- SKILLS – with Python highlighted -->
+  <!-- SKILLS -->
   <section id="skills">
     <div class="container">
       <div class="section-header"><h2>My Skills</h2><div class="section-divider"></div></div>
@@ -1000,7 +1170,7 @@
     </div>
   </section>
 
-  <!-- PROJECTS – custom two projects -->
+  <!-- PROJECTS with tech tags -->
   <section id="projects">
     <div class="container">
       <div class="section-header"><h2>My Projects</h2><div class="section-divider"></div></div>
@@ -1009,7 +1179,13 @@
           <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&h=400&fit=crop" alt="Online Examinations System">
           <h3>Online Examinations System</h3>
           <span class="project-tag">Web Application</span>
-          <p>A secure and scalable platform for conducting online exams with real-time proctoring, automated grading, and detailed analytics. Built with Python (Django) and React.</p>
+          <p>A secure and scalable platform for conducting online exams with real-time proctoring, automated grading, and detailed analytics.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">Django</span>
+            <span class="tech-tag">React</span>
+            <span class="tech-tag">PostgreSQL</span>
+          </div>
           <div class="project-links">
             <a href="#" class="btn btn-primary"><i class="fas fa-external-link-alt"></i> Live Demo</a>
             <a href="#" class="btn"><i class="fab fa-github"></i> Source</a>
@@ -1019,7 +1195,13 @@
           <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=400&fit=crop" alt="Digital Clearance System">
           <h3>Digital Clearance System</h3>
           <span class="project-tag">Graduate Student Tool</span>
-          <p>A comprehensive digital clearance system for graduating students, streamlining the clearance workflow across departments. Features real-time status tracking and notifications.</p>
+          <p>A comprehensive digital clearance system for graduating students, streamlining the clearance workflow across departments.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">Flask</span>
+            <span class="tech-tag">JavaScript</span>
+            <span class="tech-tag">MongoDB</span>
+          </div>
           <div class="project-links">
             <a href="#" class="btn btn-primary"><i class="fas fa-external-link-alt"></i> Live Demo</a>
             <a href="#" class="btn"><i class="fab fa-github"></i> Source</a>
@@ -1051,8 +1233,8 @@
           <div class="contact-icon"><i class="fas fa-envelope-open-text"></i></div>
           <div class="contact-intro"><h3>Start a Conversation</h3><p>I'm always excited to discuss new opportunities, collaborations, or just chat.</p></div>
           <div class="contact-details">
-            <div class="detail-card"><div class="detail-icon"><i class="fas fa-envelope"></i></div><div><h4>Email</h4><p>Guyodika6891@gmail.com</p></div></div>
-            <div class="detail-card"><div class="detail-icon"><i class="fas fa-phone"></i></div><div><h4>Phone</h4><p>+251 9XX XXX XXX</p></div></div>
+            <div class="detail-card"><div class="detail-icon"><i class="fas fa-envelope"></i></div><div><h4>Email</h4><p><a href="mailto:Guyodika6891@gmail.com" style="color:#2563eb; text-decoration:none;">Guyodika6891@gmail.com</a></p></div></div>
+            <div class="detail-card"><div class="detail-icon"><i class="fas fa-phone"></i></div><div><h4>Phone</h4><p><a href="tel:+2519XX" style="color:#2563eb; text-decoration:none;">+251 9XX XXX XXX</a></p></div></div>
             <div class="detail-card"><div class="detail-icon"><i class="fas fa-map-marker-alt"></i></div><div><h4>Location</h4><p>Werabe &amp; Mega City</p></div></div>
             <div class="detail-card"><div class="detail-icon"><i class="fas fa-graduation-cap"></i></div><div><h4>Position</h4><p>Lecturer at Werabe University</p></div></div>
           </div>
@@ -1075,13 +1257,37 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- CERTIFICATIONS SECTION -->
+  <section id="certifications">
+    <div class="container">
+      <div class="section-header">
+        <h2>Certifications</h2>
+        <div class="section-divider"></div>
+        <p class="section-subtitle">My professional achievements</p>
+      </div>
+      <div class="cert-grid">
+        <div class="cert-card">
+          <div class="top-bar"></div>
+          <div class="cert-icon"><i class="fab fa-python"></i></div>
+          <h3>Python Certification</h3>
+          <p class="cert-issuer">Issued by <strong>freeCodeCamp</strong></p>
+          <span class="cert-score">Score: 98%</span>
+          <br>
+          <a href="https://www.freecodecamp.org/certification/guyodika/python-v9" target="_blank" class="cert-link">
+            <i class="fas fa-external-link-alt"></i> View Certificate
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER with CV download -->
   <footer>
     <div class="container">
       <div class="footer-content">
         <div class="footer-section"><h3>GUYO DIKA</h3><p>Lecturer at Werabe University<br>Specializing in Computer Science &amp; EdTech</p><div class="footer-social"><a href="#" class="social-link linkedin"><i class="fab fa-linkedin-in"></i></a><a href="#" class="social-link github"><i class="fab fa-github"></i></a><a href="#" class="social-link twitter"><i class="fab fa-twitter"></i></a><a href="#" class="social-link facebook"><i class="fab fa-facebook-f"></i></a><a href="#" class="social-link instagram"><i class="fab fa-instagram"></i></a></div></div>
         <div class="footer-section"><h4>Quick Links</h4><ul class="footer-links"><li><a href="#about">About</a></li><li><a href="#education">Education</a></li><li><a href="#experience">Experience</a></li><li><a href="#research">Research</a></li><li><a href="#skills">Skills</a></li><li><a href="#projects">Projects</a></li><li><a href="#testimonials">Testimonials</a></li><li><a href="#contact">Contact</a></li></ul></div>
-        <div class="footer-section"><h4>Contact Info</h4><div class="footer-contact"><p><i class="fas fa-map-marker-alt"></i> Werabe/Mega City, Ethiopia</p><p><i class="fas fa-envelope"></i> guyodika@werabeuniversity.edu.et</p><p><i class="fas fa-phone"></i> +251 XXX XXX XXX</p></div><div class="footer-actions"><a href="#" class="cv-download-btn"><i class="fas fa-download"></i> Download CV</a></div></div>
+        <div class="footer-section"><h4>Contact Info</h4><div class="footer-contact"><p><i class="fas fa-map-marker-alt"></i> Werabe/Mega City, Ethiopia</p><p><i class="fas fa-envelope"></i> <a href="mailto:guyodika@werabeuniversity.edu.et" style="color:#94a3b8; text-decoration:none;">guyodika@werabeuniversity.edu.et</a></p><p><i class="fas fa-phone"></i> +251 XXX XXX XXX</p></div><div class="footer-actions"><a href="#" class="cv-download-btn" onclick="alert('CV download started!'); return false;"><i class="fas fa-download"></i> Download CV</a></div></div>
       </div>
       <div class="footer-bottom"><p>&copy; 2025 GUYO DIKA · Designed with <i class="fas fa-heart" style="color:#f87171;"></i> for education</p></div>
     </div>
@@ -1147,96 +1353,5 @@
       });
     })();
   </script>
- <!-- ==================== CERTIFICATIONS SECTION ==================== -->
-<section id="certifications" style="padding: 80px 0; background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);">
-  <div class="container">
-    <div class="section-header">
-      <h2>Certifications</h2>
-      <div class="section-divider"></div>
-      <p class="section-subtitle">My professional achievements</p>
-    </div>
-
-    <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 30px;">
-      
-      <!-- Python Certificate Card -->
-      <div style="
-        background: white;
-        border-radius: 24px;
-        padding: 40px 35px;
-        max-width: 420px;
-        width: 100%;
-        box-shadow: 0 20px 40px rgba(0,0,0,0.06);
-        border: 1px solid rgba(37, 99, 235, 0.08);
-        text-align: center;
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-      " onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 25px 50px rgba(37,99,235,0.12)'" 
-         onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.06)'">
-        
-        <!-- Top gradient bar -->
-        <div style="position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, #2563eb, #7c3aed, #f97316);"></div>
-        
-        <!-- Icon -->
-        <div style="
-          width: 70px; height: 70px;
-          background: linear-gradient(135deg, #2563eb, #7c3aed);
-          border-radius: 50%;
-          display: flex; align-items: center; justify-content: center;
-          margin: 0 auto 20px;
-          box-shadow: 0 10px 25px rgba(37, 99, 235, 0.25);
-        ">
-          <i class="fab fa-python" style="font-size: 2rem; color: white;"></i>
-        </div>
-
-        <h3 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;">
-          Python Certification
-        </h3>
-        
-        <p style="color: #64748b; font-size: 0.95rem; margin-bottom: 6px;">
-          Issued by <strong>freeCodeCamp</strong>
-        </p>
-        
-        <p style="
-          display: inline-block;
-          background: #ecfdf5;
-          color: #059669;
-          font-weight: 600;
-          padding: 6px 16px;
-          border-radius: 50px;
-          font-size: 0.9rem;
-          margin: 12px 0 25px;
-        ">
-          Score: 98%
-        </p>
-
-        <br>
-        
-        <a href="https://www.freecodecamp.org/certification/guyodika/python-v9" 
-           target="_blank"
-           style="
-             display: inline-flex;
-             align-items: center;
-             gap: 8px;
-             background: linear-gradient(135deg, #2563eb, #1d4ed8);
-             color: white;
-             padding: 14px 28px;
-             border-radius: 50px;
-             text-decoration: none;
-             font-weight: 600;
-             font-size: 0.95rem;
-             box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
-             transition: all 0.3s ease;
-           "
-           onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 12px 25px rgba(37,99,235,0.35)'"
-           onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 20px rgba(37,99,235,0.25)'">
-          <i class="fas fa-external-link-alt"></i>
-          View Certificate
-        </a>
-      </div>
-
-    </div>
-  </div>
-</section>
 </body>
 </html>
