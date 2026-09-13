@@ -159,7 +159,6 @@
     }
     .nav-links li a.active i { color: #2563eb; }
 
-    /* NEW: CV Button in Nav */
     .nav-cv-btn {
       background: linear-gradient(135deg, #f97316, #ea580c) !important;
       color: #fff !important;
@@ -482,7 +481,6 @@
       box-shadow: 0 24px 48px rgba(0,0,0,0.06);
     }
 
-    /* QUANTIFIED ACHIEVEMENTS - NEW STYLES */
     .achievement-badge {
       display: inline-flex;
       align-items: center;
@@ -546,7 +544,6 @@
     .experience-responsibilities li::before {
       content: '✓'; position: absolute; left: 0; color: #22c55e; font-weight: 700;
     }
-    /* QUANTIFIED METRICS IN EXPERIENCE */
     .exp-metric {
       display: inline-block;
       background: rgba(255,255,255,0.15);
@@ -664,7 +661,6 @@
     }
     .btn-primary:hover { background: linear-gradient(135deg, #1d4ed8, #4338ca); }
 
-    /* PROJECT TECH STACK TAGS - NEW */
     .tech-tags {
       display: flex;
       flex-wrap: wrap;
@@ -983,7 +979,6 @@
         <li><a href="#projects"><i class="fas fa-project-diagram"></i> Projects</a></li>
         <li><a href="#testimonials"><i class="fas fa-comments"></i> Testimonials</a></li>
         <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
-        <!-- NEW: CV Download Button in Nav -->
         <li><a href="#" class="nav-cv-btn" onclick="alert('CV download started!'); return false;"><i class="fas fa-file-pdf"></i> CV</a></li>
       </ul>
       <div class="menu-toggle" id="menuToggle" aria-label="Menu">
@@ -1072,7 +1067,7 @@
     </div>
   </section>
 
-  <!-- EDUCATION with quantified achievements -->
+  <!-- EDUCATION -->
   <section id="education">
     <div class="container">
       <div class="section-header"><h2>Education &amp; Qualifications</h2><div class="section-divider"></div><p class="section-subtitle">My academic journey</p></div>
@@ -1084,7 +1079,7 @@
     </div>
   </section>
 
-  <!-- EXPERIENCE with quantified metrics -->
+  <!-- EXPERIENCE -->
   <section id="experience">
     <div class="container">
       <div class="section-header"><h2>Teaching Experience</h2><div class="section-divider"></div><p class="section-subtitle">My journey in academia</p></div>
@@ -1124,7 +1119,7 @@
     </div>
   </section>
 
-  <!-- SKILLS -->
+  <!-- ============ SKILLS with FLASK added ============ -->
   <section id="skills">
     <div class="container">
       <div class="section-header"><h2>My Skills</h2><div class="section-divider"></div></div>
@@ -1154,6 +1149,14 @@
             <div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div>
           </div>
         </div>
+        <!-- ============ NEW: FLASK SKILL ============ -->
+        <div class="skill-item">
+          <div class="skill-info">
+            <h3><i class="fas fa-flask"></i> Flask</h3>
+            <div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div>
+          </div>
+          <span style="font-size:0.7rem; font-weight:600; color:#2563eb; background:#eff6ff; padding:4px 12px; border-radius:40px;">Advanced</span>
+        </div>
         <div class="skill-item">
           <div class="skill-info">
             <h3><i class="fab fa-react"></i> React</h3>
@@ -1170,7 +1173,7 @@
     </div>
   </section>
 
-  <!-- PROJECTS with tech tags -->
+  <!-- ============ PROJECTS with Blog App and Task Manager added ============ -->
   <section id="projects">
     <div class="container">
       <div class="section-header"><h2>My Projects</h2><div class="section-divider"></div></div>
@@ -1205,6 +1208,44 @@
           <div class="project-links">
             <a href="#" class="btn btn-primary"><i class="fas fa-external-link-alt"></i> Live Demo</a>
             <a href="#" class="btn"><i class="fab fa-github"></i> Source</a>
+          </div>
+        </div>
+
+        <!-- ============ NEW: BLOG APP ============ -->
+        <div class="project-card">
+          <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=600&h=400&fit=crop" alt="Blog Application">
+          <h3>Blog Application</h3>
+          <span class="project-tag">Full-Stack Web App</span>
+          <p>A full-featured blogging platform with user authentication, post management, comments, search, and password hashing. Fully responsive and deployed on Render.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">Flask</span>
+            <span class="tech-tag">SQLAlchemy</span>
+            <span class="tech-tag">Bootstrap 5</span>
+            <span class="tech-tag">SQLite</span>
+          </div>
+          <div class="project-links">
+            <a href="https://blog-app.onrender.com" class="btn btn-primary" target="_blank"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+            <a href="https://github.com/guyodika6891-lgtm/blog_app" class="btn" target="_blank"><i class="fab fa-github"></i> Source</a>
+          </div>
+        </div>
+
+        <!-- ============ NEW: TASK MANAGER ============ -->
+        <div class="project-card">
+          <img src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=600&h=400&fit=crop" alt="Task Manager Application">
+          <h3>Task Manager</h3>
+          <span class="project-tag">Productivity Tool</span>
+          <p>A full-featured task management app with user accounts, priority levels, due dates, filters (All/Active/Completed), and secure password hashing. Mobile-responsive with Bootstrap 5.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">Flask</span>
+            <span class="tech-tag">SQLAlchemy</span>
+            <span class="tech-tag">Bootstrap 5</span>
+            <span class="tech-tag">Bcrypt</span>
+          </div>
+          <div class="project-links">
+            <a href="https://task-manager.onrender.com" class="btn btn-primary" target="_blank"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+            <a href="https://github.com/guyodika6891-lgtm/task_manager" class="btn" target="_blank"><i class="fab fa-github"></i> Source</a>
           </div>
         </div>
       </div>
@@ -1281,7 +1322,7 @@
     </div>
   </section>
 
-  <!-- FOOTER with CV download -->
+  <!-- FOOTER -->
   <footer>
     <div class="container">
       <div class="footer-content">
