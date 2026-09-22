@@ -28,18 +28,18 @@ A modern, animated portfolio website showcasing my work as a Lecturer and Techno
 - Testimonials
 - Contact
 - Certifications
+## 🚀 Live Projects
 
-## 🚀 Featured Projects
-
-| Project | Description | Live |
-|---------|-------------|------|
-| 📝 Blog App | Full-featured blog platform | [Demo](https://blog-app-46v4.onrender.com/) |
-| ✅ Task Manager | Task management app | [Demo](https://task-manager-wc0p.onrender.com) |
-| 🔗 URL Shortener | Fast link shortener | [Demo](https://url-shortener-qbwc.onrender.com) |
-| 📝 Notes App | Notes with tags | [Demo](https://notes-app-j72r.onrender.com) |
-| 💰 Expense Tracker | Finance dashboard | [Demo](https://expense-tracker-4omg.onrender.com) |
-| 🎓 Quiz Master | Quiz platform | [Demo](https://quiz-app-0vps.onrender.com) |
-| 💬 Chat App | Real-time chat | [Demo](https://chat-app-1-3s6i.onrender.com/) |
+| Project | Live Demo | Source Code |
+|---------|-----------|-------------|
+| 📝 Blog | [Demo](https://blog-app-46v4.onrender.com) | [Code](https://github.com/guyodika6891-lgtm/blog_app) |
+| ✅ Task Manager | [Demo](https://task-manager-wc0p.onrender.com) | [Code](https://github.com/guyodika6891-lgtm/task_manager) |
+| 🔗 URL Shortener | [Demo](https://url-shortener-qbwc.onrender.com) | [Code](https://github.com/guyodika6891-lgtm/url_shortener) |
+| 📝 Notes | [Demo](https://notes-app-j72r.onrender.com) | [Code](https://github.com/guyodika6891-lgtm/notes_app) |
+| 💰 Expense Tracker | [Demo](https://expense-tracker-4omg.onrender.com) | [Code](https://github.com/guyodika6891-lgtm/expense_tracker) |
+| 🎓 Quiz Master | [Demo](https://quiz-app-0vps.onrender.com) | [Code](https://github.com/guyodika6891-lgtm/quiz_app) |
+| 💬 Chat App | [Demo](https://chat-app-1-3s6i.onrender.com) | [Code](https://github.com/guyodika6891-lgtm/chat_app) |
+| 💼 Job Board | [Demo](https://job-board-113z.onrender.com/) | [Code](https://github.com/guyodika6891-lgtm/job_board) |
 
 ## 🛠️ Technologies
 
