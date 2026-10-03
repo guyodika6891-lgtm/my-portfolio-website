@@ -54,11 +54,12 @@
     @keyframes spin { to { transform: rotate(360deg); } }
 
     /* ============ SCROLL REVEAL ============ */
-    .reveal {
-      opacity: 0;
-      transform: translateY(50px);
-      transition: opacity .9s cubic-bezier(.4,0,.2,1), transform .9s cubic-bezier(.4,0,.2,1);
-    }
+   .reveal {
+          opacity: 0;
+          transform: translateY(50px);
+          transition: opacity .9s cubic-bezier(.4,0,.2,1), transform .9s cubic-bezier(.4,0,.2,1);
+}
+.no-js .reveal { opacity: 1; transform: none; }
     .reveal.active {
       opacity: 1;
       transform: translateY(0);
@@ -1395,7 +1396,7 @@
     }
   </style>
 </head>
-<body>
+<body class="no-js">
   <div class="loading" id="loading"><div class="spinner"></div></div>
 
   <!-- HEADER -->
@@ -1412,9 +1413,9 @@
         <li><a href="#research"><i class="fas fa-microscope"></i> Research</a></li>
         <li><a href="#skills"><i class="fas fa-tools"></i> Skills</a></li>
         <li><a href="#projects"><i class="fas fa-project-diagram"></i> Projects</a></li>
-        <li><a href="#testimonials"><i class="fas fa-comments"></i> Testimonials</a></li>
+        
         <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
-        <li><a href="#" class="nav-cv-btn" onclick="alert('CV download started!'); return false;"><i class="fas fa-file-pdf"></i> CV</a></li>
+        <a href="Guyo-Dika-CV.pdf" download class="nav-cv-btn"><i class="fas fa-file-pdf"></i> CV</a>
       </ul>
       <div class="menu-toggle" id="menuToggle" aria-label="Menu">
         <span></span><span></span><span></span>
@@ -1430,9 +1431,9 @@
     <li style="--i:3"><a href="#research"><i class="fas fa-microscope"></i> Research</a></li>
     <li style="--i:4"><a href="#skills"><i class="fas fa-tools"></i> Skills</a></li>
     <li style="--i:5"><a href="#projects"><i class="fas fa-project-diagram"></i> Projects</a></li>
-    <li style="--i:6"><a href="#testimonials"><i class="fas fa-comments"></i> Testimonials</a></li>
+    
     <li style="--i:7"><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
-    <li style="--i:8"><a href="#" class="mobile-cv-btn" onclick="alert('CV download started!'); return false;"><i class="fas fa-file-pdf"></i> Download CV</a></li>
+    <a href="Guyo-Dika-CV.pdf" download class="mobile-cv-btn"><i class="fas fa-file-pdf"></i> Download CV</a>
   </ul>
 
   <!-- HERO -->
@@ -1493,7 +1494,7 @@
         <div class="action-buttons reveal reveal-right d-2">
           <a href="#projects" class="action-btn primary"><i class="fas fa-eye"></i> View My Work</a>
           <a href="#contact" class="action-btn secondary"><i class="fas fa-envelope"></i> Get In Touch</a>
-          <a href="#" class="action-btn tertiary" onclick="alert('CV download started!'); return false;"><i class="fas fa-file-pdf"></i> Download CV</a>
+         <a href="Guyo-Dika-CV.pdf" download class="action-btn tertiary"><i class="fas fa-file-pdf"></i> Download CV</a>
         </div>
       </div>
     </div>
@@ -1830,21 +1831,6 @@
           </div>
         </div>
 
-        <!-- Digital Clearance System -->
-        <div class="project-card reveal d-2">
-          <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=400&fit=crop" alt="Digital Clearance System" loading="lazy" onerror="this.onerror=null;this.src='https://via.placeholder.com/600x400?text=Image+Unavailable';">
-          <h3>Digital Clearance System</h3>
-          <span class="project-tag">Graduate Student Tool</span>
-          <p>A comprehensive digital clearance system for graduating students, streamlining the clearance workflow across departments.</p>
-          <div class="tech-tags">
-            <span class="tech-tag">Python</span><span class="tech-tag">Flask</span><span class="tech-tag">JavaScript</span><span class="tech-tag">MongoDB</span>
-          </div>
-          <div class="project-links">
-            <a href="#" class="btn btn-primary"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-            <a href="#" class="btn"><i class="fab fa-github"></i> Source</a>
-          </div>
-        </div>
-
         <!-- Blog Application -->
         <div class="project-card reveal d-3">
           <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=600&h=400&fit=crop" alt="Blog Application" loading="lazy" onerror="this.onerror=null;this.src='https://via.placeholder.com/600x400?text=Image+Unavailable';">
@@ -2067,10 +2053,6 @@
               <div><h4>Email</h4><p><a href="mailto:Guyodika6891@gmail.com" style="color:#2563eb;text-decoration:none;">Guyodika6891@gmail.com</a></p></div>
             </div>
             <div class="detail-card">
-              <div class="detail-icon"><i class="fas fa-phone"></i></div>
-              <div><h4>Phone</h4><p><a href="tel:+2519XX" style="color:#2563eb;text-decoration:none;">+251 9XX XXX XXX</a></p></div>
-            </div>
-            <div class="detail-card">
               <div class="detail-icon"><i class="fas fa-map-marker-alt"></i></div>
               <div><h4>Location</h4><p>Werabe &amp; Mega City</p></div>
             </div>
@@ -2082,14 +2064,9 @@
           <div class="social-section">
             <h4 style="margin-top: 8px;">Connect With Me</h4>
             <div class="social-links">
-              <a href="#" class="social-link linkedin" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-              <a href="#" class="social-link github" aria-label="GitHub"><i class="fab fa-github"></i></a>
-              <a href="#" class="social-link twitter" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+              <a href="https://github.com/guyodika6891-lgtm" class="social-link github" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+              <a href="https://www.linkedin.com/in/YOUR-HANDLE" class="social-link linkedin" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
               <a href="https://www.facebook.com/guyo.dika.9168" class="social-link facebook" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-              <a href="#" class="social-link instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-              <a href="#" class="social-link google" aria-label="Google"><i class="fab fa-google"></i></a>
-              <a href="#" class="social-link researchgate" aria-label="ResearchGate"><i class="fab fa-researchgate"></i></a>
-              <a href="#" class="social-link whatsapp" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
             </div>
           </div>
         </div>
@@ -2098,13 +2075,13 @@
             <h3>Send a Message</h3>
             <p>Fill out the form and I'll get back soon.</p>
           </div>
-          <form class="contact-form" onsubmit="event.preventDefault();alert('Thanks! Your message has been sent.');this.reset();">
-            <div class="form-group"><label>Full Name</label><input type="text" placeholder="Your Full Name" required></div>
-            <div class="form-group"><label>Email</label><input type="email" placeholder="your.email@example.com" required></div>
-            <div class="form-group"><label>Subject</label><input type="text" placeholder="What's this about?" required></div>
-            <div class="form-group"><label>Message</label><textarea placeholder="Tell me about your project..." required></textarea></div>
-            <button type="submit" class="submit-btn"><span>Send Message</span> <i class="fas fa-paper-plane"></i></button>
-          </form>
+          <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+              <div class="form-group"><label>Full Name</label><input type="text" name="name" placeholder="Your Full Name" required></div>
+              <div class="form-group"><label>Email</label><input type="email" name="email" placeholder="your.email@example.com" required></div>
+              <div class="form-group"><label>Subject</label><input type="text" name="subject" placeholder="What's this about?" required></div>
+              <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell me about your project..." required></textarea></div>
+              <button type="submit" class="submit-btn"><span>Send Message</span> <i class="fas fa-paper-plane"></i></button>
+        </form>
         </div>
       </div>
     </div>
@@ -2142,11 +2119,9 @@
           <h3>GUYO DIKA</h3>
           <p>Lecturer at Werabe University<br>Specializing in Computer Science &amp; EdTech</p>
           <div class="footer-social">
-            <a href="#" class="social-link linkedin"><i class="fab fa-linkedin-in"></i></a>
-            <a href="#" class="social-link github"><i class="fab fa-github"></i></a>
-            <a href="#" class="social-link twitter"><i class="fab fa-twitter"></i></a>
-            <a href="https://www.facebook.com/guyo.dika.9168" class="social-link facebook" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="social-link instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://github.com/guyodika6891-lgtm" class="social-link github" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/YOUR-HANDLE" class="social-link linkedin" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://www.facebook.com/guyo.dika.9168" class="social-link facebook" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
           </div>
         </div>
         <div class="footer-section reveal d-2">
@@ -2158,7 +2133,7 @@
             <li><a href="#research">Research</a></li>
             <li><a href="#skills">Skills</a></li>
             <li><a href="#projects">Projects</a></li>
-            <li><a href="#testimonials">Testimonials</a></li>
+            
             <li><a href="#contact">Contact</a></li>
           </ul>
         </div>
@@ -2166,11 +2141,11 @@
           <h4>Contact Info</h4>
           <div class="footer-contact">
             <p><i class="fas fa-map-marker-alt"></i> Werabe/Mega City, Ethiopia</p>
-            <p><i class="fas fa-envelope"></i> <a href="mailto:guyodika@werabeuniversity.edu.et" style="color:#94a3b8;text-decoration:none;">guyodika@werabeuniversity.edu.et</a></p>
-            <p><i class="fas fa-phone"></i> +251 XXX XXX XXX</p>
+            <p><i class="fas fa-envelope"></i> <a href="mailto:Guyodika6891@gmail.com" style="color:#94a3b8;text-decoration:none;">Guyodika6891@gmail.com</a></p>
+            
           </div>
           <div class="footer-actions">
-            <a href="#" class="cv-download-btn" onclick="alert('CV download started!'); return false;"><i class="fas fa-download"></i> Download CV</a>
+            <a href="Guyo-Dika-CV.pdf" download class="cv-download-btn"><i class="fas fa-download"></i> Download CV</a>
           </div>
         </div>
       </div>
@@ -2184,7 +2159,8 @@
 
   <script>
     (function() {
-      // ============ LOADING ============
+        document.body.classList.remove('no-js');
+  // ============ LOADING ============
       window.addEventListener('load', () => {
         setTimeout(() => document.getElementById('loading').classList.add('hidden'), 700);
       });
